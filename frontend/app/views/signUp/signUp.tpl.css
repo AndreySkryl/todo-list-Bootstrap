@@ -1,0 +1,31 @@
+#wrapper_for_sign_up {
+    height: 600px;
+    margin: auto;
+    padding-top: 100px;
+    width: 400px;
+}
+
+#wrapper_for_sign_up > h1 {
+    font-size: 30px;
+}
+
+#wrapper_for_sign_up label, #wrapper_for_sign_up input, #wrapper_for_sign_up a {
+    font-size: 20px;
+    width: 100%;
+    margin: 5px 0;
+}
+
+#wrapper_for_sign_up a:hover {
+    cursor: pointer;
+}
+
+#wrapper_for_sign_up input[type="text"],
+#wrapper_for_sign_up input[type="email"],
+#wrapper_for_sign_up input[type="password"] {
+    font-size: 20px;
+    width: 100%;
+}
+
+#wrapper_for_sign_up input[type="submit"] {
+
+}

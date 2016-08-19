@@ -1,0 +1,56 @@
+#header {
+    height: 70px;
+    background-color: #d7d7d7;
+    overflow: hidden;
+}
+
+#navigation {
+    left: 10px;
+    position: relative;
+}
+
+#navigation ul li {
+    float: left;
+    list-style: none;
+    line-height: 70px;
+    padding: 0 14px;
+    position: relative;
+    text-align: center;
+}
+
+#navigation ul li a {
+    color: #747474;
+    display: block;
+    font-size: 24px;
+}
+
+#navigation ul li:hover {
+    background-color: #b7b7b7;
+}
+
+#user_profile {
+    float: right;
+    line-height: 70px;
+    position: relative;
+    right: 30px;
+}
+
+#user_profile ul li {
+    float: left;
+    height: 70px;
+    list-style: none;
+}
+
+#user_profile ul li img {
+    border-radius: 30px;
+    background: aliceblue;
+    line-height: 70px;
+    height: 60px;
+    margin: 5px;
+    width: 60px;
+}
+
+#user_full_name {
+    color: #747474;
+    font-size: 24px;
+}

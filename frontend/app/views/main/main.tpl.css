@@ -1,0 +1,191 @@
+.center_VH {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+}
+
+#templates_of_lists_of_tasks > fieldset > legend,
+#lists_of_tasks > fieldset > legend,
+#search_new_people > fieldset > legend,
+#colleagues > p {
+    color: #747474;
+    font-size: 33px;
+}
+
+#templates_of_lists_of_tasks fieldset,
+#lists_of_tasks fieldset {
+    border: 3px solid #747474;
+    border-radius: 10px;
+    padding: 5px 10px;
+}
+
+/* Списки задач */
+#wrapper_for_lists_of_tasks {
+    float: left;
+    margin-left: 15px;
+    position: relative;
+    width: 70%;
+}
+
+/* Заголовки */
+div#title_for_favourites,
+div#title_for_list_of_tasks {
+    display: table-cell;
+    height: 35px;
+    line-height: 35px;
+    text-align: center;
+}
+
+div#title_for_favourites > img,
+div#title_for_list_of_tasks > img {
+    height: 35px;
+    width: 35px;
+    vertical-align: middle;
+}
+
+
+div#collection_of_templates > ul > li,
+div#collection_of_list_of_tasks > ul > li {
+    border: 0.15em solid #a5a5a5;
+    border-radius: 10px;
+    margin: 5px 10px;
+    /*padding: 5px 10px;*/
+
+    cursor: pointer;
+    display: block;
+    float: left;
+    height: 80px;
+    width: 190px;
+
+    text-align: center;
+}
+
+/* Оформления списка шаблонов */
+li.add_list_of_tasks, li.list_of_tasks {
+    height: 70px;
+    overflow: hidden;
+}
+
+li.add_list_of_tasks:hover, li.list_of_tasks:hover {
+    background-color: #e5e5e5;
+}
+
+li.list_of_tasks {
+    line-height: 70px;
+    position: relative;
+}
+
+li.list_of_tasks a {
+    display: inline-block;
+    font-size: 18px;
+    height: 100%;
+    line-height: 80px;
+    text-decoration: none;
+    width: 100%;
+}
+
+li.list_of_tasks > img.close {
+    display: none;
+    height: 25px;
+    position: absolute;
+    right: 2px;
+    top: 2px;
+    width: 25px;
+}
+
+li.list_of_tasks:hover > img.close {
+    display: block;
+}
+
+li.add_list_of_tasks > ul > li:nth-child(1) {
+    height: 50px;
+}
+
+li.add_list_of_tasks > ul > li:nth-child(2) {
+    height: 20px;
+}
+
+li.add_list_of_tasks > ul > li > img {
+    border-radius: 25px;
+    background-color: #bbb;
+    height: 50px;
+    margin: auto 5px;
+    width: 50px;
+}
+
+li.add_list_of_tasks > ul > li > span,
+li.list_of_tasks > span {
+    color: #747474;
+    font-size: 18px;
+    line-height: 18px;
+    height: inherit;
+    width: inherit;
+
+    overflow-wrap: normal;  /* не поддерживает IE, Firefox; является копией word-wrap */
+    word-wrap: normal;
+    word-break: normal;  /* не поддерживает Opera12.14, значение keep-all не поддерживается IE, Chrome */
+    line-break: auto;  /* нет поддержки для русского языка */
+    hyphens: manual;  /* значение auto не поддерживается Chrome */
+}
+
+/* Коллеги */
+#colleagues {
+    float: right;
+    margin: 0 15px;
+    position: relative;
+    width: calc(100% - 70% - 45px);
+}
+
+#colleagues > p {
+    text-align: center;
+}
+
+/* Поиск */
+input#search_of_user {
+    align-content: center;
+    border-radius: 12px;
+    color: #747474;
+    font-size: 14px;
+    height: 25px;
+    margin: 12px 0;
+    padding-left: 10px;
+    position: relative;
+    width: calc(100% - 15px);
+}
+
+#list_of_colleagues {
+    border: 3px solid #747474;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+li.colleague {
+    cursor: pointer;
+    display: block;
+    height: 50px;
+    line-height: 50px;
+    padding: 5px 10px;
+}
+
+li.colleague:hover {
+    background-color: #e5e5e5;
+}
+
+li.colleague > ul > li {
+    float: left;
+    list-style: none;
+    height: 50px;
+}
+
+li.colleague > ul > li > img {
+    border-radius: 25px;
+    /*background-color: #bbb;*/
+    height: 50px;
+    margin: auto 5px;
+    width: 50px;
+}
+
+li.colleague > ul > li > span.user_full_name {
+    color: #747474;
+    font-size: 24px;
+}

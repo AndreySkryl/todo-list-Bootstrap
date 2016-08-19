@@ -1,0 +1,71 @@
+<toolbar></toolbar>
+<div id="wrapper_for_lists_of_tasks" ng-controller="ListsOfTasksController">
+    <!-- шаблоны списков задач -->
+    <div id="templates_of_lists_of_tasks">
+        <fieldset>
+            <legend>
+                <div id="title_for_favourites">
+                    <img src="img/gold_star.png" alt="Favourites">Шаблоны списков задач
+                </div>
+            </legend>
+            <div id="collection_of_templates">
+                <ul>
+                    <li class="add_list_of_tasks" ng-click="popUpDialogAddTemplateListOfTasks()">
+                        <ul>
+                            <li><img src="img/add.png" alt="+"></li>
+                            <li><span>Добавить список</span></li>
+                        </ul>
+                    </li>
+                    <pop-up-dialog-add-template-list-of-tasks></pop-up-dialog-add-template-list-of-tasks>
+
+                    <li class="list_of_tasks" ng-repeat="listOfTasks in listsOfTasks | filter:{favourites:1} | orderBy:['name']">
+                        <a ui-sref="listOfTasks({ guidOfListOfTasks: listOfTasks.guid })">{{ listOfTasks.name }}</a>
+                        <img src="img/close.png" class="close" ng-click="deleteListOfTasks(listOfTasks)">
+                    </li>
+                </ul>
+            </div>
+        </fieldset>
+    </div>
+
+    <!-- списки задач -->
+    <div id="lists_of_tasks">
+        <fieldset>
+            <legend>
+                <div id="title_for_list_of_tasks">
+                    <img src="img/star.png" alt="Обычные списки">Списки задач
+                </div>
+            </legend>
+            <div id="collection_of_list_of_tasks">
+                <ul>
+                    <li class="add_list_of_tasks" ng-click="popUpDialogAddSimpleListOfTasks()">
+                        <ul>
+                            <li><img src="img/add.png" alt="+"></li>
+                            <li><span>Добавить список</span></li>
+                        </ul>
+                    </li>
+                    <pop-up-dialog-add-simple-list-of-tasks></pop-up-dialog-add-simple-list-of-tasks>
+
+                    <li class="list_of_tasks" ng-repeat="listOfTasks in listsOfTasks | filter:{favourites:0} | orderBy:['name']">
+                        <a ui-sref="listOfTasks({ guidOfListOfTasks: listOfTasks.guid })">{{ listOfTasks.name }}</a>
+                        <img src="img/close.png" class="close" ng-click="deleteListOfTasks(listOfTasks)">
+                    </li>
+                </ul>
+            </div>
+        </fieldset>
+    </div>
+</div>
+
+<div id="colleagues" ng-controller="ColleaguesController">
+    <p>Коллеги</p>
+    <input id="search_of_user" type="text" placeholder="Поиск" ng-model="colleaguesController.search">
+    <div id="list_of_colleagues">
+        <ul>
+            <li class="colleague" ng-repeat="colleague in colleagues | filter:colleaguesController.search | orderBy:['lastName', 'firstName']">
+                <ul>
+                    <li><img src="img/photo_of_user.png" alt="Фото пользователя"/></li>
+                    <li><span class="user_full_name">{{ colleague.lastName }} {{ colleague.firstName }}</span></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>

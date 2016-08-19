@@ -1,0 +1,23 @@
+/* Общие */
+a, a:hover, a:focus, a:active {
+    text-decoration: none;
+    outline: none;
+}
+
+img {
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+#wrapper {
+    position: relative;
+    /*width: 1000px;*/
+    margin: 0 auto;
+    background: #ffffff;
+}
+
+legend {
+    width: auto;
+}

@@ -1,0 +1,213 @@
+#search_new_people > fieldset > legend,
+#collection_of_people > fieldset > ul > li > p,
+#colleagues > p {
+    color: #747474;
+    font-size: 33px;
+}
+
+#search_new_people > fieldset {
+    border: 3px solid #747474;
+    border-radius: 10px;
+}
+
+#search_new_people > fieldset > legend {
+    vertical-align: baseline;
+    display: block;
+}
+
+#search_new_people > fieldset > legend > img {
+    margin-left: 10px;
+    height: 35px;
+    width: 35px;
+}
+
+/* список новых пользователей */
+#wrapper_for_users {
+    float: left;
+    margin-left: 15px;
+    position: relative;
+    width: 70%;
+}
+
+/* Заголовки */
+div#title_form_of_search {
+    display: table-cell;
+    height: 35px;
+    line-height: 35px;
+    text-align: center;
+}
+
+div#title_form_of_search > img {
+    height: 35px;
+    width: 35px;
+    vertical-align: middle;
+}
+
+#search {
+    margin: 5px 10px;
+    height: 34px;
+}
+
+input#edit_for_search_new_user {
+    border-radius: 12px;
+    font-size: 14px;
+    height: 25px;
+    padding: 0 10px;
+    width: 100%;
+}
+
+input#find,
+input.add_user {
+    font-weight: 700;
+    font-size: 16px;
+    height: 32px;
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    background: rgb(64,199,129);
+    box-shadow: 0 -3px rgb(53,167,110) inset;
+    transition: 0.2s;
+}
+
+input#find {
+    width: calc(100% - 70% - 7 * 10px);
+}
+
+input.add_user {
+    float: right;
+    position: relative;
+    width: calc(100% - 70% - 10px);
+}
+
+input#find:hover, input.add_user:hover {
+    background: rgb(53, 167, 110);
+}
+
+input#find:active, input.add_user:active {
+    background: rgb(33,147,90);
+    box-shadow: 0 3px rgb(33,147,90) inset;
+}
+
+#collection_of_people {
+    margin-top: 15px;
+    overflow: hidden;
+}
+
+#collection_of_people > fieldset {
+    border-radius: 10px;
+    border-top: 3px solid #747474;
+    overflow: hidden;
+}
+
+li.user {
+    height: 50px;
+    line-height: 50px;
+    padding: 5px 10px;
+}
+
+li.user:hover {
+    background-color: #eaeaea;
+}
+
+li.user ul > li {
+    float: left;
+    list-style: none;
+    height: 50px;
+}
+
+li.user ul > li > img {
+    border-radius: 25px;
+    background-color: #bbb;
+    height: 50px;
+    margin-right: 5px;
+    width: 50px;
+}
+
+li.user > ul > li > span {
+    color: #747474;
+    font-size: 22px;
+}
+
+/* Коллеги */
+#colleagues {
+    float: right;
+    margin: 0 15px;
+    position: relative;
+    width: calc(100% - 70% - 45px);
+}
+
+#colleagues > p {
+    text-align: center;
+}
+
+/* Поиск */
+input#search_of_user {
+    align-content: center;
+    border-radius: 12px;
+    color: #747474;
+    font-size: 14px;
+    height: 25px;
+    margin: 12px 0;
+    padding-left: 10px;
+    position: relative;
+    width: calc(100% - 15px);
+}
+
+#list_of_colleagues {
+    border: 3px solid #747474;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+li.colleague {
+    cursor: pointer;
+    display: block;
+    height: 50px;
+    line-height: 50px;
+    padding: 5px 10px;
+}
+
+li.colleague:hover {
+    background-color: #e5e5e5;
+}
+
+li.colleague > ul > li {
+    float: left;
+    list-style: none;
+    height: 50px;
+}
+
+li.colleague > ul > li > img {
+    border-radius: 25px;
+    /*background-color: #bbb;*/
+    height: 50px;
+    margin: auto 5px;
+    width: 50px;
+}
+
+li.colleague > ul > li > span.user_full_name {
+    color: #747474;
+    font-size: 24px;
+}
+
+li.colleague > ul.actions {
+    float: right;
+    height: 50px;
+}
+
+li.colleague > ul.actions > li {
+    float: left;
+    height: 50px;
+    width: 50px;
+}
+
+li.colleague > ul.actions > li > img {
+    height: 40px;
+    width: 40px;
+    margin: 5px 0;
+    opacity: 0.7;
+}
+
+li.colleague > ul.actions > li > img:hover {
+    opacity: 1;
+}

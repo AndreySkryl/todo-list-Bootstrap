@@ -1,0 +1,21 @@
+<div id="wrapper_for_login">
+    <div id="login-password-container">
+        <h1>Вход в TODO List</h1>
+        <form method="post" name="loginForm" id="formForLogin">
+            <div>
+                <label for="login">Электронная почта или логин:</label>
+                <input type="text" id="login" placeholder="например, user@gmail.com или user" required ng-model="user.login">
+            </div>
+
+            <div>
+                <label for="password">Пароль:</label>
+                <input type="password" id="password" placeholder="например, qwerty" required ng-model="user.password">
+            </div>
+
+            <div>
+                <input type="submit" value="Войти"  ng-click="login(user)" ng-disabled="loginForm.$invalid">
+                <a ui-sref="signUp">Создать аккаунт</a>
+            </div>
+        </form>
+    </div>
+</div>

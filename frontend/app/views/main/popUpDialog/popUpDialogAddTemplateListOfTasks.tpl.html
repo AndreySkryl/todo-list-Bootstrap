@@ -1,0 +1,45 @@
+<div id="popUpDialogAddTemplateListOfTasks-bg" ng-show="showPopUpDialogAddTemplateListOfTasks">
+    <div id="popUpDialogAddTemplateListOfTasks">
+        <span>
+            <label for="nameOfTemplateListOfTasks">Наименование:</label>
+            <input id="nameOfTemplateListOfTasks" type="text" ng-model="nameOfTemplateListOfTasks">
+        </span>
+
+        <fieldset ng-show="(listsOfTasks | filter:{favourites:1}).length != 0">
+            <div>
+                <input id="creatingTemplateListOfTasksBasedOnTemplateListOfTasks"
+                       type="radio" name="favourites" value="1"
+                       ng-model="typeOfCreateOfTemplateListOfTasks"
+                >
+                <label for="creatingTemplateListOfTasksBasedOnTemplateListOfTasks">На основе шаблона:</label>
+            </div>
+
+            <div>
+                <select
+                        ng-model = "selectedTemplateListOfTasks"
+                        ng-options = "listOfTasks.guid as listOfTasks.name for listOfTasks in listsOfTasks | filter:{favourites:1} | orderBy:['name']"
+                        ng-init = "selectedTemplateListOfTasks = listsOfTasks[0]"
+                        ng-disabled = "typeOfCreateOfTemplateListOfTasks === '0'"
+                >
+                </select>
+            </div>
+
+            <div>
+                <input id="creatingTemplateListOfTasksBasedOnSimpleListOfTasks"
+                       type="radio" name="favourites" value="0"
+                       ng-model="typeOfCreateOfTemplateListOfTasks">
+                <label for="creatingTemplateListOfTasksBasedOnSimpleListOfTasks">Чистый список задач</label>
+            </div>
+        </fieldset>
+
+        <div class="description">
+            <label for="descriptionOfCreatedTemplateListOfTasks">Описание списка задач:</label>
+            <textarea id="descriptionOfCreatedTemplateListOfTasks" ng-model="descriptionOfTemplateListOfTasks"></textarea>
+        </div>
+
+        <div id="activitiesForCreatedTemplateListOfTasks">
+            <button id="addTemplateListOfTasksApprove" ng-click="popUpDialogAddTemplateListOfTasksApprove()">Ок</button>
+            <button id="addTemplateListOfTasksCancel" ng-click="closePopUpDialogAddTemplateListOfTasks()">Отмена</button>
+        </div>
+    </div>
+</div>

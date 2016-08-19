@@ -1,0 +1,49 @@
+<toolbar></toolbar>
+<div id="wrapper_for_users" ng-controller="UsersController">
+    <!-- поиск новых людей -->
+    <div id="search_new_people">
+        <fieldset>
+            <legend>
+                <div id="title_form_of_search">
+                    <img src="img/search.png" alt="Поиск">Поиск новых людей
+                </div>
+            </legend>
+            <div id="search">
+                <input id="edit_for_search_new_user" type="text" placeholder="Введите фамилию и имя" ng-model="userController.search">
+            </div>
+
+            <div id="collection_of_people">
+                <fieldset>
+                    <ul>
+                        <li class="user" ng-repeat="user in users | filter:userController.search | orderBy:['lastName', 'firstName']">
+                            <ul>
+                                <li><img src="img/photo_of_user.png" alt="Фото"></li>
+                                <li><span>{{ user.lastName }} {{ user.firstName }}</span></li>
+                            </ul>
+                            <button class="pull-right btn btn-success" type="button" ng-click="newColleague(user)"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp; Добавить в коллеги</button>
+                            <!--<input class="add_user" type="submit" value="Добавить в коллеги" ng-click="newColleague(user)">-->
+                        </li>
+                    </ul>
+                </fieldset>
+            </div>
+        </fieldset>
+    </div>
+</div>
+
+<div id="colleagues" ng-controller="ColleaguesController">
+    <p>Коллеги</p>
+    <input id="search_of_user" type="text" placeholder="Поиск" ng-model="colleaguesController.search">
+    <div id="list_of_colleagues">
+        <ul>
+            <li class="colleague" ng-repeat="colleague in colleagues | filter:colleaguesController.search | orderBy:['lastName', 'firstName']">
+                <ul>
+                    <li><img src="img/photo_of_user.png" alt="Фото пользователя"/></li>
+                    <li><span class="user_full_name">{{ colleague.lastName }} {{ colleague.firstName }}</span></li>
+                </ul>
+                <ul class="actions">
+                    <li ng-click="deleteOneColleague(colleague)"><img src="img/cross.jpg" alt="Удалить из списка коллег"></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>

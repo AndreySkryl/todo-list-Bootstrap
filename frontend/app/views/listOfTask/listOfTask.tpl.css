@@ -1,0 +1,245 @@
+.center_VH {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.clear {
+    clear: both;
+}
+
+#description_of_list_of_tasks > fieldset > legend,
+#description_of_tasks > fieldset > legend,
+#colleagues > p {
+    color: #747474;
+    font-size: 33px;
+}
+
+#description_of_list_of_tasks > fieldset,
+#description_of_tasks > fieldset {
+    border: 3px solid #747474;
+    border-radius: 10px;
+}
+
+/* список задач */
+#wrapper_for_list_of_tasks {
+    float: left;
+    margin-left: 15px;
+    position: relative;
+    width: 70%;
+}
+
+#description_of_list_of_tasks > fieldset > legend {
+    padding-left: 0;
+}
+
+#description_of_list_of_tasks > fieldset > span {
+    color: #747474;
+}
+
+#description_of_list_of_tasks > fieldset > span > p {
+    margin: 5px 10px;
+    text-align: justify;
+    text-indent: 15px;
+}
+
+/* Описание задач */
+div#description_of_tasks {
+    margin: 10px 0;
+    float: left;
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+div#list_of_statuses {
+    height: 100%;
+    width: 100%;
+}
+
+div#list_of_statuses > ul {
+    border: 2px solid #747474;
+    border-radius: 15px;
+    float: right;
+    margin: 0 10px 10px 0;
+    overflow: hidden;
+}
+
+div#list_of_statuses > ul > li {
+    border-right: 2px solid #747474;
+    float: left;
+    width: 100px;
+    padding: 5px 0;
+
+    cursor: pointer;
+    display: block;
+    text-align: center;
+    opacity: 1;
+}
+
+div#list_of_statuses > ul > li:hover {
+    opacity: 0.9;
+}
+
+#list_of_statuses > ul > li:last-child {
+    border-right: none;
+}
+
+#list_of_statuses > ul > li:nth-child(1) { background: red; }
+#list_of_statuses > ul > li:nth-child(2) { background: orange; }
+#list_of_statuses > ul > li:nth-child(3) { background: yellow; }
+#list_of_statuses > ul > li:nth-child(4) { background: #39f560; }
+
+/* Поиск/добавление задач */
+#search {
+    font-size: 16px;
+    margin: 0 10px;
+}
+
+input#search_of_task {
+    border-radius: 12px;
+    color: #747474;
+    height: 34px;
+    padding-left: 10px;
+    width: 80%;
+}
+
+/*input#add {
+    font-weight: 700;
+    font-size: 16px;
+    height: 30px;
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    background: rgb(64, 199, 129);
+    box-shadow: 0 -3px rgb(53, 167, 110) inset;
+    transition: 0.2s;
+    width: calc(20% - 2 * 10px);
+}
+
+input#add:hover {
+    background: rgb(53, 167, 110);
+}
+
+input#add:active {
+    background: rgb(33,147,90);
+    box-shadow: 0 3px rgb(33,147,90) inset;
+}*/
+
+
+div#list_of_tasks {
+    border-top: 3px solid #747474;
+    border-radius: 10px;
+    margin-top: 5px;
+    overflow: hidden;
+}
+
+li.description_of_task {
+    height: 50px;
+    line-height: 50px;
+    opacity: 0.85;
+}
+
+li.description_of_task:hover {
+    opacity: 1;
+}
+
+.plan { background-color: orange; }
+.process { background-color: yellow; }
+.done { background-color: #39f560; }
+
+li.description_of_task > span {
+    color: #747474;
+    font-size: 18px;
+    padding-left: 10px;
+    word-wrap: break-word;
+}
+
+li.description_of_task > ul {
+    float: right;
+    height: 50px;
+}
+
+li.description_of_task > ul > li {
+    float: left;
+    height: 50px;
+    width: 50px;
+}
+
+li.description_of_task > ul > li > img {
+    height: 40px;
+    width: 40px;
+    margin: 5px 0;
+    opacity: 0.7;
+}
+
+li.description_of_task > ul > li > img:hover {
+    opacity: 1;
+}
+
+/* Коллеги */
+#colleagues {
+    float: right;
+    margin: 0 15px;
+    position: relative;
+    width: calc(100% - 70% - 45px);
+}
+
+#colleagues > p {
+    text-align: center;
+}
+
+/* Поиск */
+#addColleague {
+    margin: 5px 0;
+    width: 100%;
+}
+
+input#search_of_user {
+    align-content: center;
+    border-radius: 12px;
+    color: #747474;
+    font-size: 14px;
+    height: 25px;
+    margin: 12px 0;
+    padding-left: 10px;
+    position: relative;
+    width: calc(100% - 15px);
+}
+
+#list_of_colleagues {
+    border: 3px solid #747474;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+li.colleague {
+    cursor: pointer;
+    display: block;
+    height: 50px;
+    line-height: 50px;
+    padding: 5px 10px;
+}
+
+li.colleague:hover {
+    background-color: #e5e5e5;
+}
+
+li.colleague > ul > li {
+    float: left;
+    list-style: none;
+    height: 50px;
+}
+
+li.colleague > ul > li > img {
+    border-radius: 25px;
+    /*background-color: #bbb;*/
+    height: 50px;
+    margin: auto 5px;
+    width: 50px;
+}
+
+li.colleague > ul > li > span.user_full_name {
+    color: #747474;
+    font-size: 24px;
+}

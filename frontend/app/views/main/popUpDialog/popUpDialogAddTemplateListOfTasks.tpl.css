@@ -1,0 +1,76 @@
+.container {
+    padding-top: 10px;
+}
+#popUpDialogAddTemplateListOfTasks-bg {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 1;
+}
+#popUpDialogAddTemplateListOfTasks {
+    position: fixed;
+    width: 400px;
+    left: 50%;
+    margin-left: -200px;
+    margin-top: 5%;
+    padding: 15px;
+    border-radius: 5px;
+    background: white;
+}
+
+#popUpDialogAddTemplateListOfTasks > fieldset {
+    margin: 10px 0;
+}
+
+#popUpDialogAddTemplateListOfTasks > fieldset > input,
+#popUpDialogAddTemplateListOfTasks > fieldset > select {
+    /*display: block;*/
+    margin: 5px;
+}
+
+#popUpDialogAddTemplateListOfTasks > fieldset > div > select {
+    width: 100%;
+}
+
+label[for="nameOfTemplateListOfTasks"] {
+    cursor: pointer;
+    display: inline-block;
+    width: 110px;
+}
+
+#nameOfTemplateListOfTasks {
+    width: calc(400px - 110px - 2 * 5px);
+}
+
+.description {
+    overflow: hidden;
+}
+
+textarea {
+    border-radius: 10px;
+    height: 100px;
+    padding: 5px;
+    resize: none;
+    width: 97%;
+}
+
+#activities {
+    margin-top: 10px;
+}
+
+#addTemplateListOfTasksApprove,
+#addTemplateListOfTasksCancel {
+    width: 40%;
+    margin: auto 5%;
+}
+
+#addTemplateListOfTasksApprove {
+    float: left;
+}
+
+#addTemplateListOfTasksCancel {
+    float: right;
+}

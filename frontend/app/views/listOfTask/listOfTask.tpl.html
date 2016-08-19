@@ -1,0 +1,88 @@
+<toolbar></toolbar>
+<div id="wrapper_for_list_of_tasks" ng-controller="ListOfTasksController">
+    <div id="description_of_list_of_tasks">
+        <fieldset>
+            <legend>Список задач: {{ listOfTasks.name }}</legend>
+            <span>
+                <p>{{ listOfTasks.description }}</p>
+            </span>
+        </fieldset>
+    </div>
+
+    <div id="description_of_tasks" ng-controller="TasksController">
+        <fieldset>
+            <legend>Описание задач:</legend>
+            <div id="list_of_statuses">
+                <ul>
+                    <li><span>Все</span></li>
+                    <li><span>В плане</span></li>
+                    <li><span>В процессе</span></li>
+                    <li><span>Решенные</span></li>
+                </ul>
+            </div>
+
+            <div class="clear"></div>
+
+            <div id="search">
+                <input id="search_of_task" type="text" placeholder="Поиск" ng-model="descriptionOfTask">
+                <button id="add" class="pull-right btn btn-success" type="button" ng-click="newTask(descriptionOfTask)">
+                    <i class="fa fa-plus" aria-hidden="true"></i>&nbsp; Добавить задачу
+                </button>
+                <!--<input id="add" type="submit" value="Добавить" ng-click="newTask(descriptionOfTask)">-->
+            </div>
+
+            <div id="list_of_tasks">
+                <ul>
+                    <li ng-repeat="task in tasks" class="description_of_task"
+                        ng-class="{
+                            'plan': task.status == 'PLAN',
+                            'process': task.status == 'PROCESS',
+                            'done': task.status == 'DONE'
+                        }"
+                    >
+                        <span>{{ task.description }}</span>
+                        <ul>
+                            <li ng-click="changeStatusToPlan(task)" ng-if="task.status == 'PROCESS'">
+                                <img src="img/status/orange_ellipse.png"
+                                     alt="Перевести задачу в состояние {status: 'PLAN'}">
+                            </li>
+                            <li ng-click="changeStatusToProcess(task)"
+                                ng-if="task.status == 'PLAN' || task.status == 'DONE'">
+                                <img src="img/status/yellow_ellipse.png"
+                                     alt="Перевести задачу в состояние {status: 'PROCESS'}">
+                            </li>
+                            <li ng-click="changeStatusToDone(task)" ng-if="task.status == 'PROCESS'">
+                                <img src="img/status/green_ellipse.png"
+                                     alt="Перевести задачу в состояние {status: 'DONE'}">
+                            </li>
+                            <li ng-click="deleteTask(task)"><img src="img/cross.jpg" alt="Удалить задачу"></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </fieldset>
+    </div>
+</div>
+
+<div id="colleagues" ng-controller="ListOfTasksController">
+    <p>Подписчики данного списка задач</p>
+
+    <!--<input id="search_of_user" type="text" placeholder="Добавить коллегу">-->
+    <button id="addColleague" type="button" class="btn btn-success" ng-click="popUpDialogAddColleague()">
+        <i class="fa fa-user-plus" aria-hidden="true"></i>&nbsp; Добавить коллегу
+    </button>
+
+    <div id="list_of_colleagues">
+        <ul>
+            <li class="colleague" ng-repeat="subscriber in subscribers">
+                <ul>
+                    <li><img src="img/photo_of_user.png" alt="Фото пользователя" width="50" height="50"/></li>
+                    <li><span class="user_full_name">{{ subscriber.lastName }} {{ subscriber.firstName }}</span></li>
+                </ul>
+                <ul class="actions">
+                    <li ng-click="deleteSubscriber(subscriber)"><img src="img/cross.jpg" alt="Удалить из списка подписчиков"></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>

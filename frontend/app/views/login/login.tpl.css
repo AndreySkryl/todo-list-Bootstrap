@@ -1,0 +1,33 @@
+#wrapper_for_login {
+    padding-top: 100px;
+}
+
+#login-password-container {
+    height: 600px;
+    margin: auto;
+    width: 400px;
+}
+
+#login-password-container > h1 {
+    font-size: 30px;
+}
+
+#formForLogin label, #formForLogin input, #formForLogin a {
+    font-size: 20px;
+    width: 100%;
+    margin: 5px 0;
+}
+
+#formForLogin a:hover {
+    cursor: pointer;
+}
+
+#formForLogin input[type="text"],
+#formForLogin input[type="password"] {
+    font-size: 20px;
+    width: 100%;
+}
+
+#formForLogin input[type="submit"] {
+    width: 30%;
+}

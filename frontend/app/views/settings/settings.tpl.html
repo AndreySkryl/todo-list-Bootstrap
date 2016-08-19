@@ -1,0 +1,52 @@
+<toolbar></toolbar>
+<div id="wrapper_for_settings" ng-controller="SettingsController">
+    <div id="photo_of_user">
+        <div id="photo">
+            <img src="img/photo_of_user.png" alt="Фото пользователя">
+        </div>
+
+        <div id="change">
+            <a id="change_photo" href="#">Заменить фото?</a>
+        </div>
+    </div>
+
+    <form name="formOfSettings" novalidate ng-submit="apply()">
+        <ul id="settings">
+            <li>
+                <label for="e-mail">E-mail<span class="required">*</span>:</label>
+                <input type="email" id="e-mail" ng-model="userSettings.eMail">
+            </li>
+            <!--<li>
+                <label for="old_password">Старый пароль:</label>
+                <input type="password" id="old_password" ng-model="userSettings.password">
+            </li>-->
+            <li>
+                <label for="new_password">Новый пароль:</label>
+                <input type="password" id="new_password" ng-model="newPassword">
+            </li>
+            <li>
+                <label for="confirm_new_password">Подтверждение нового пароля:</label>
+                <input type="password" id="confirm_new_password" ng-model="confirmOfNewPassword">
+            </li>
+
+            <li>
+                <label for="login">Логин<span class="required">*</span>:</label>
+                <input type="text" id="login" ng-model="userSettings.login">
+            </li>
+            <li>
+                <label for="lastname">Фамилия:</label>
+                <input type="text" id="lastname" ng-model="userSettings.lastName">
+            </li>
+            <li>
+                <label for="firstname">Имя:</label>
+                <input type="text" id="firstname" ng-model="userSettings.firstName">
+            </li>
+        </ul>
+
+        <div class="clear"></div>
+
+        <div id="apply">
+            <input type="submit" value="Применить изменения" id="apply_the_changes">
+        </div>
+    </form>
+</div>

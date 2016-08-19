@@ -1,0 +1,19 @@
+<div ng-controller="ModalDialogAddColleagueCtrl">
+    <div class="modal-header">
+        <h3 class="modal-title">Окно для добавления коллег к данному списку задач.</h3>
+    </div>
+    <div class="modal-body">
+        <ul>
+            <li class="user" ng-repeat="unsignedColleague in unsignedColleagues | orderBy:['lastName', 'firstName']">
+                <ul>
+                    <li><img src="img/photo_of_user.png" alt="Фото пользователя"/></li>
+                    <li><span class="user_full_name">{{ unsignedColleague.lastName }} {{ unsignedColleague.firstName }}</span></li>
+                </ul>
+
+                <button class="pull-right btn btn-success" type="button" ng-click="addColleague(unsignedColleague.guid)">
+                    <i class="fa fa-user-plus" aria-hidden="true"></i>
+                </button>
+            </li>
+        </ul>
+    </div>
+</div>
