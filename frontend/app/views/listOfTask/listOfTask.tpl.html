@@ -14,10 +14,10 @@
             <legend>Описание задач:</legend>
             <div id="list_of_statuses">
                 <ul>
-                    <li><span>Все</span></li>
-                    <li><span>В плане</span></li>
-                    <li><span>В процессе</span></li>
-                    <li><span>Решенные</span></li>
+                    <li ng-click="statusOfTasks = ''"><span>Все</span></li>
+                    <li ng-click="statusOfTasks = 'PLAN'"><span>В плане</span></li>
+                    <li ng-click="statusOfTasks = 'PROCESS'"><span>В процессе</span></li>
+                    <li ng-click="statusOfTasks = 'DONE'"><span>Решенные</span></li>
                 </ul>
             </div>
 
@@ -33,7 +33,7 @@
 
             <div id="list_of_tasks">
                 <ul>
-                    <li ng-repeat="task in tasks" class="description_of_task"
+                    <li ng-repeat="task in tasks | filter:{status:statusOfTasks}" class="description_of_task"
                         ng-class="{
                             'plan': task.status == 'PLAN',
                             'process': task.status == 'PROCESS',
