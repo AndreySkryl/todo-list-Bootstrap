@@ -3,13 +3,13 @@
         <h1>Вход в TODO List</h1>
         <form method="post" name="loginForm" id="formForLogin">
             <div>
-                <label for="login">Электронная почта или логин:</label>
+                <label for="login">Электронная почта или логин<span class="required">*</span>:</label>
                 <input type="text" id="login" placeholder="например, user@gmail.com или user" required ng-model="user.login">
             </div>
 
             <div>
                 <label for="password">Пароль:</label>
-                <input type="password" id="password" placeholder="например, qwerty" required ng-model="user.password">
+                <input type="password" id="password" placeholder="например, qwerty" ng-model="user.password">
             </div>
 
             <div>

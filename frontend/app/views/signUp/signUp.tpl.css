@@ -14,6 +14,9 @@
     width: 100%;
     margin: 5px 0;
 }
+#wrapper_for_sign_up a {
+    width: auto;
+}
 
 #wrapper_for_sign_up a:hover {
     cursor: pointer;
