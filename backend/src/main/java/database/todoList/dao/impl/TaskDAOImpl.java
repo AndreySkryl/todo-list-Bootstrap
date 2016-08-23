@@ -16,8 +16,13 @@ public class TaskDAOImpl implements TaskDAO {
 
     @Override
     public void insert(Task task) {
-        String sql = "INSERT INTO TASK (LIST_OF_TASKS_GUID, STATUS, DESCRIPTION) VALUES (?, ?, ?)";
-        jdbcTemplate.update(sql, task.getListOfTasksGuid(), task.getStatus().toString(), task.getDescription());
+		String sqlForMaxDisplayPositionOfTask = "SELECT MAX(DISPLAY_POSITION) FROM task;";
+		Integer number = jdbcTemplate.queryForObject(sqlForMaxDisplayPositionOfTask, new Object[]{}, Integer.class);
+		if (number == null) number = 0;
+		else number = number + 1;
+
+		String sql = "INSERT INTO TASK (LIST_OF_TASKS_GUID, STATUS, DESCRIPTION, DISPLAY_POSITION) VALUES (?, ?, ?, ?)";
+        jdbcTemplate.update(sql, task.getListOfTasksGuid(), task.getStatus().toString(), task.getDescription(), number.intValue());
     }
 
     @Override
@@ -38,13 +43,13 @@ public class TaskDAOImpl implements TaskDAO {
 
     @Override
     public Collection<Task> findAll() {
-        String sql = "SELECT * FROM TASK";
+        String sql = "SELECT * FROM TASK ORDER BY DISPLAY_POSITION ASC;";
 		return jdbcTemplate.query(sql, new TaskRowMapper());
     }
 
     @Override
     public Collection<Task> findAllTasksOfListOfTasks(String guidOfListOfTasks) {
-        String sql = "SELECT * FROM TASK WHERE TASK.LIST_OF_TASKS_GUID = ?;";
+        String sql = "SELECT * FROM TASK WHERE TASK.LIST_OF_TASKS_GUID = ? ORDER BY DISPLAY_POSITION ASC;";
         return jdbcTemplate.query(sql, new TaskRowMapper(), guidOfListOfTasks);
     }
 
@@ -57,8 +62,12 @@ public class TaskDAOImpl implements TaskDAO {
 
     @Override
     public void update(Task task) {
-		String sql = "UPDATE TASK SET LIST_OF_TASKS_GUID = ?, STATUS = ?, DESCRIPTION = ? WHERE GUID = ?;";
-		jdbcTemplate.update(sql, task.getListOfTasksGuid(), task.getStatus().getValue(), task.getDescription(), task.getGuid());
+		String sql = "UPDATE TASK SET LIST_OF_TASKS_GUID = ?, STATUS = ?, DESCRIPTION = ?, DISPLAY_POSITION = ? WHERE GUID = ?;";
+		jdbcTemplate.update(sql, task.getListOfTasksGuid(), task.getStatus().getValue(), task.getDescription(), task.getDisplayPosition(), task.getGuid());
+	}
+
+	public void update(Collection<Task> tasks) {
+		for (Task task : tasks) { update(task); }
 	}
 
 	@Override

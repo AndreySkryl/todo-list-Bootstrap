@@ -13,6 +13,7 @@ public interface TaskService {
 	int findCountOfTasks();
 
 	void updateTask(Task task);
+	void updateTasks(Collection<Task> tasks);
 
 	void deleteTask(String guidOfTask);
 	void deleteTasks(Collection<String> guidesOfTask);

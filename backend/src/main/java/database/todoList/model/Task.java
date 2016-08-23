@@ -12,16 +12,17 @@ public class Task {
     String guid;
     Status status;
     String description;
-    Timestamp createTime;
-    Timestamp updateTime;
-
+	Integer displayPosition;
+	Timestamp createTime;
+	Timestamp updateTime;
     public Task() {}
 
-    public Task(String listOfTasksGuid, String guid, Status status, String description) {
+    public Task(String listOfTasksGuid, String guid, Status status, String description, Integer displayPosition) {
         this.listOfTasksGuid = listOfTasksGuid;
         this.guid = guid;
         this.status = status;
         this.description = description;
+		this.displayPosition = displayPosition;
     }
 
     public String getListOfTasksGuid() {
@@ -55,6 +56,14 @@ public class Task {
     public void setDescription(String description) {
         this.description = description;
     }
+
+	public Integer getDisplayPosition() {
+		return displayPosition;
+	}
+
+	public void setDisplayPosition(Integer displayPosition) {
+		this.displayPosition = displayPosition;
+	}
 
     public Timestamp getCreateTime() {
         return createTime;

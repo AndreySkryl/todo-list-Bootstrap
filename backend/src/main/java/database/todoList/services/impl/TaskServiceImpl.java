@@ -67,6 +67,15 @@ public class TaskServiceImpl implements TaskService {
 	}
 
 	@Override
+	public void updateTasks(Collection<Task> tasks) {
+		for (Task task : tasks) {
+			if (!validation(task)) throw new IllegalArgumentException(THE_OBJECT_IS_NOT_VALID);
+		}
+
+		taskDAO.update(tasks);
+	}
+
+	@Override
 	public void deleteTask(String guidOfTask) {
 		if (guidOfTask == null) throw new IllegalArgumentException(INVALID_GUID);
 

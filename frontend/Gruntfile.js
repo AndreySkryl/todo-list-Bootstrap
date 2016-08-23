@@ -59,6 +59,7 @@ module.exports = function(grunt) {
 					'build/js/<%= pkg.name %>.js': [
 						'build/node_modules/angular/angular.js',
 						'build/node_modules/angular-animate/angular-animate.js',
+						'build/node_modules/angular-drag-and-drop-lists/angular-drag-and-drop-lists.js',
 						'build/node_modules/angular-touch/angular-touch.js',
 						'build/node_modules/angular-ui-bootstrap/dist/ui-bootstrap.js',
 						'build/node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js',

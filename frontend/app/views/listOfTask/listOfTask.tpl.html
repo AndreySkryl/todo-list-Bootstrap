@@ -32,13 +32,22 @@
             </div>
 
             <div id="list_of_tasks">
-                <ul>
-                    <li ng-repeat="task in tasks | filter:{status:statusOfTasks}" class="description_of_task"
+                <!-- добавляем возможность 'drag and drop' -->
+                <ul dnd-list="models.tasks">
+                    <li ng-repeat="task in models.tasks | filter:{status:statusOfTasks}"
+                        dnd-draggable="task"
+                        dnd-moved="models.tasks.splice($index, 1)"
+                        dnd-effect-allowed="move"
+                        dnd-selected="models.selected = item"
+                        dnd-dragend="updatePositionsOfTasks()"
                         ng-class="{
-                            'plan': task.status == 'PLAN',
-                            'process': task.status == 'PROCESS',
-                            'done': task.status == 'DONE'
+                            'selected': models.selected === item,
+
+                            'plan': task.status === 'PLAN',
+                            'process': task.status === 'PROCESS',
+                            'done': task.status === 'DONE'
                         }"
+                        class="description_of_task"
                     >
                         <span>{{ task.description }}</span>
                         <ul>

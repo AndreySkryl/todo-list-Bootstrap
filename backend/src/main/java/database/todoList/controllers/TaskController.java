@@ -84,6 +84,17 @@ public class TaskController {
 		return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
+	@RequestMapping(value = "/edit/some", consumes = "application/json", method = RequestMethod.PUT)
+	public ResponseEntity<HttpStatus> updateTasks(@RequestBody Collection<Task> tasks) {
+		try {
+			taskService.updateTasks(tasks);
+			return new ResponseEntity<>(HttpStatus.OK);
+		} catch (Throwable exception) {
+			System.err.println(exception.getMessage());
+		}
+		return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+
 	@RequestMapping(value = "/delete/one", method = RequestMethod.DELETE)
 	public ResponseEntity<HttpStatus> deleteTask(@RequestParam(Task.GUID_OF_TASK) String guidOfTask) {
 		try {

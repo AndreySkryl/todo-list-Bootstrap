@@ -3,18 +3,32 @@
 
 	angular.module('todoListApp')
 		.controller('TasksController', ['$scope', '$rootScope', 'taskService', '$stateParams', function ($scope, $rootScope, taskService, $stateParams) {
-			$scope.tasks = [];
+			$scope.models = {
+				selected: null,
+				tasks: []
+			};
+
 			var guidOfListOfTasks = $stateParams.guidOfListOfTasks;
 
-			var syncModelWithServer = function () {
+			$scope.updatePositionsOfTasks = function () {
+				for (var id = 0; id < $scope.models.tasks.length; id++) {
+					$scope.models.tasks[id].displayPosition = id;
+				}
+
+				var promise = taskService.updateTasks($scope.models.tasks);
+				promise.success(function (data, status, headers, config) {
+					$scope.syncModelWithServer();
+				});
+			};
+			$scope.syncModelWithServer = function () {
 				var promise = taskService.getAllTasksOfListOfTasks(guidOfListOfTasks);
 				promise.success(function (data, status, headers, config) {
-					$scope.tasks = data;
+					$scope.models.tasks = data;
 				}).error(function (data, status, headers, config) {
 					alert(status);
 				});
 			};
-			syncModelWithServer();
+			$scope.syncModelWithServer();
 
 			$scope.newTask = function (descriptionOfTask) {
 				var task = {
@@ -25,7 +39,7 @@
 
 				var promise = taskService.newTask(task);
 				promise.success(function (data, status, headers, config) {
-					syncModelWithServer();
+					$scope.syncModelWithServer();
 				}).error(function (data, status, headers, config) {
 					alert(status);
 				});
@@ -33,19 +47,18 @@
 			$scope.deleteTask = function (task) {
 				var promise = taskService.deleteTask(task.guid);
 				promise.success(function (data, status, headers, config) {
-					syncModelWithServer();
+					$scope.syncModelWithServer();
 				}).error(function (data, status, headers, config) {
 					alert(status);
 				});
 			};
-
 
 			$scope.changeStatusToPlan = function (task) {
 				task.status = 'PLAN';
 
 				var promise = taskService.updateTask(task);
 				promise.success(function (data, status, headers, config) {
-					syncModelWithServer();
+					$scope.syncModelWithServer();
 				}).error(function (data, status, headers, config) {
 					alert(status);
 				});
@@ -55,7 +68,7 @@
 
 				var promise = taskService.updateTask(task);
 				promise.success(function (data, status, headers, config) {
-					syncModelWithServer();
+					$scope.syncModelWithServer();
 				}).error(function (data, status, headers, config) {
 					alert(status);
 				});
@@ -65,10 +78,14 @@
 
 				var promise = taskService.updateTask(task);
 				promise.success(function (data, status, headers, config) {
-					syncModelWithServer();
+					$scope.syncModelWithServer();
 				}).error(function (data, status, headers, config) {
 					alert(status);
 				});
 			};
+
+			$scope.$watch('models', function(model) {
+				$scope.modelAsJson = angular.toJson(model, true);
+			}, true);
 		}]);
 })();

@@ -15,6 +15,7 @@ public interface TaskDAO {
     int findTotalTasks();
 
 	void update(Task task);
+	void update(Collection<Task> tasks);
 
 	void delete(String guidOfTask);
 	void deleteByGuidOfListOfTasks(String guidOfTask);

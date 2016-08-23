@@ -49,6 +49,14 @@
 				});
 			};
 
+			service.updateTasks = function (tasks) {
+				return $http({
+					method: 'PUT',
+					url: configAppService.api + '/task/edit/some',
+					data: tasks
+				});
+			};
+
 			service.deleteTask = function (guidOfTask) {
 				return $http({
 					method: 'DELETE',

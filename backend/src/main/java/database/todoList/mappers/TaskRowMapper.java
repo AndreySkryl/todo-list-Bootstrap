@@ -16,6 +16,7 @@ public class TaskRowMapper implements RowMapper<Task> {
         String status = resultSet.getString("STATUS");
         task.setStatus(Status.fromString(status));
         task.setDescription(resultSet.getString("DESCRIPTION"));
+        task.setDisplayPosition(resultSet.getInt("DISPLAY_POSITION"));
         task.setCreateTime(resultSet.getTimestamp("CREATE_TIME"));
         task.setUpdateTime(resultSet.getTimestamp("UPDATE_TIME"));
         return task;
