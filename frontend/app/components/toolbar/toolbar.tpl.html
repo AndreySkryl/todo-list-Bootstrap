@@ -8,7 +8,7 @@
     </div>
     <div id="user_profile" ng-controller="ToolbarController">
         <ul>
-            <li><img src="img/photo_of_user.png" alt="Фото пользователя"></li>
+            <li><img ng-src="{{ photoOfUser }}" alt="Фото пользователя"></li>
             <li><span id="user_full_name">{{user.lastName}} {{user.firstName}}</span></li>
 
             <li><button type="button" class="btn btn-default" ng-click="logout()" value="Выйти">Выйти</button></li>

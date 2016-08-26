@@ -1,7 +1,7 @@
 (function () {
 	'use strict';
 
-	angular.module('todoListApp', ['ui.router', 'ui.bootstrap', 'dndLists'])
+	angular.module('todoListApp', ['ui.router', 'ngAnimate', 'ui.bootstrap', 'dndLists', 'ngFileUpload'])
 		.config(['$urlRouterProvider', '$stateProvider',
 			function ($urlRouterProvider, $stateProvider) {
 

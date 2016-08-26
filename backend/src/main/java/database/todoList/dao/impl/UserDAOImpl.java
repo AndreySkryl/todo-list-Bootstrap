@@ -3,14 +3,24 @@ package database.todoList.dao.impl;
 import database.todoList.dao.UserDAO;
 import database.todoList.mappers.UserRowMapper;
 import database.todoList.model.User;
+import database.todoList.utils.UtilForManageResources;
+import database.todoList.utils.UtilForWorkWithFileAndDirectories;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.UUID;
 
 @Repository
 public class UserDAOImpl implements UserDAO {
@@ -49,10 +59,43 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public void insert(User user) {
-        String sql = "INSERT INTO USER (LOGIN, LASTNAME, FIRSTNAME, PASSWORD, EMAIL) VALUES (?, ?, ?, ?, ?);";
-        jdbcTemplate.update(sql, user.getLogin(), user.getLastName(), user.getFirstName(),
-				user.getPassword(), user.geteMail());
-    }
+		String guidOfUser = UUID.randomUUID().toString();
+		try {
+			while (true) {
+				String sqlForCountOfUserWithTheGuid = "SELECT COUNT(*) FROM USER WHERE GUID = ?;";
+				Integer count = 0;
+				try {
+					count = jdbcTemplate.queryForObject(sqlForCountOfUserWithTheGuid, new Object[]{guidOfUser}, Integer.class);
+					if (count == null || (count != null && count == 0)) break;
+				} catch (Throwable ignored) {
+					System.err.println(count.toString());
+				}
+
+				guidOfUser = UUID.randomUUID().toString();
+			}
+
+			// создание директории для пользователя
+			File pathForDirs = new File(UtilForManageResources.PATH_TO_RESOURCES_OF_TABLE_USER + guidOfUser);
+			pathForDirs.mkdirs();
+			String pathToPhotoOfUser = "";
+			try {
+				File fileForIn = new File(UtilForManageResources.PATH_TO_DEFAULT_PHOTO_OF_USER);
+				pathToPhotoOfUser = UtilForManageResources.PATH_TO_RESOURCES_OF_TABLE_USER + guidOfUser + "/" + fileForIn.getName();
+				File fileForOut = new File(pathToPhotoOfUser);
+				// копирование default-ого изображения для аватара пользователя
+				UtilForWorkWithFileAndDirectories.copyFileUsingStream(fileForIn, fileForOut);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+			String sql = "INSERT INTO USER (GUID, LOGIN, LASTNAME, FIRSTNAME, PASSWORD, EMAIL, PATH_TO_PHOTO_OF_USER)" +
+					" VALUES (?, ?, ?, ?, ?, ?, ?);";
+			jdbcTemplate.update(sql, guidOfUser, user.getLogin(), user.getLastName(), user.getFirstName(),
+					user.getPassword(), user.geteMail(), pathToPhotoOfUser);
+		} catch (Throwable throwable) {
+			throw throwable;
+		}
+	}
 
     @Override
     public void insertBatch(Collection<User> users) {
@@ -116,12 +159,44 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public void delete(String guid) {
-        String sql = "DELETE FROM USER WHERE GUID = ?;";
-        jdbcTemplate.update(sql, guid);
+		String sql = "DELETE FROM USER WHERE GUID = ?;";
+		jdbcTemplate.update(sql, guid);
+
+		UtilForWorkWithFileAndDirectories.deleteDirectory(new File(UtilForManageResources.PATH_TO_RESOURCES_OF_TABLE_USER + guid));
     }
 
 	@Override
 	public void delete(Collection<String> guides) {
 		for (String guid : guides) delete(guid);
+	}
+
+	@Override
+	public void updatePhotoOfUser(MultipartFile file, String guidOfUser) throws IOException {
+		String pathToOldPhotoOfUser = getPathToPhotoOfUser(guidOfUser);
+		UtilForWorkWithFileAndDirectories.deleteFile(pathToOldPhotoOfUser);
+
+		byte[] bytes = file.getBytes();
+		InputStream is = new ByteArrayInputStream(bytes);
+		String fileExtension = UtilForWorkWithFileAndDirectories.getFileExtension(file.getOriginalFilename());
+		String pathToNewPhotoOfUser = UtilForManageResources.PATH_TO_RESOURCES_OF_TABLE_USER + guidOfUser + "/" +
+				UtilForManageResources.DEFAULT_NAME_OF_FILE_OF_PHOTO_OF_USER + "." + fileExtension;
+		OutputStream os = new FileOutputStream(pathToNewPhotoOfUser);
+		byte[] buffer = new byte[1024];
+		int length;
+		while ((length = is.read(buffer)) > 0) {
+			os.write(buffer, 0, length);
+		}
+		is.close();
+		os.close();
+
+		String sql = "UPDATE USER SET PATH_TO_PHOTO_OF_USER = ? WHERE GUID = ?";
+		jdbcTemplate.update(sql, pathToNewPhotoOfUser, guidOfUser);
+	}
+
+	@Override
+	public String getPathToPhotoOfUser(String guidOfUser) {
+		String sql = "SELECT PATH_TO_PHOTO_OF_USER FROM USER WHERE GUID = ?;";
+
+		return jdbcTemplate.queryForObject(sql, new Object[]{guidOfUser}, String.class);
 	}
 }

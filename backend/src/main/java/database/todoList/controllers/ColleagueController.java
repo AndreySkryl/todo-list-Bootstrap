@@ -62,6 +62,7 @@ public class ColleagueController {
 		try {
 			Collection<String> listOfGuidOfColleagues = getGuidOfColleagues(guidOfUser).getBody();
 			Collection<User> listOfColleagues = userService.findUsersByGuid(listOfGuidOfColleagues);
+			User.convertFROMPathToPhotoOfUserTOBase64StringFromImage(listOfColleagues);
 			return new ResponseEntity<>(listOfColleagues, HttpStatus.OK);
 		} catch (Throwable exception) {
 			System.err.println(exception.getMessage());

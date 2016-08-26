@@ -35,14 +35,10 @@
     width: 100%;
 }
 
-label[for="nameOfTemplateListOfTasks"] {
+label[for="nameOfTemplateListOfTasks"], label[for="descriptionOfCreatedTemplateListOfTasks"] {
     cursor: pointer;
-    display: inline-block;
-    width: 110px;
-}
-
-#nameOfTemplateListOfTasks {
-    width: calc(400px - 110px - 2 * 5px);
+    display: block;
+    margin-bottom: 5px;
 }
 
 .description {

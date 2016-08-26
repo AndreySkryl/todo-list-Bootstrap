@@ -3,6 +3,7 @@ package database.todoList.controllers;
 import database.todoList.model.User;
 import database.todoList.services.ColleagueService;
 import database.todoList.services.UserService;
+import database.todoList.utils.UtilForWorkWithMedia;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -67,6 +69,7 @@ public class UserController {
     public ResponseEntity<User> getUserByGuid(@RequestParam(User.GUID_OF_USER) String guid) {
 		try {
 			User user = userService.findUserByGuid(guid);
+			User.convertFROMPathToPhotoOfUserTOBase64StringFromImage(user);
 			return new ResponseEntity<>(user, HttpStatus.OK);
 		} catch (Throwable exception) {
 			System.err.println(exception.getMessage());
@@ -80,8 +83,9 @@ public class UserController {
 			Collection<String> guidesOfColleagues = colleagueService.findGuidesOfColleaguesByUserGuid(guidOfUserSender);
 
 			Collection<User> allUsersWithoutUserSenderAndColleagues =
-//					userService.f1(guidOfUserSender, guidesOfColleagues);
 					userService.findAllUsersWithoutUserSenderAndColleagues(guidOfUserSender, guidesOfColleagues);
+
+			User.convertFROMPathToPhotoOfUserTOBase64StringFromImage(allUsersWithoutUserSenderAndColleagues);
 
 		return new ResponseEntity<>(allUsersWithoutUserSenderAndColleagues, HttpStatus.OK);
 		} catch (Throwable exception) {
@@ -119,6 +123,31 @@ public class UserController {
 			return new ResponseEntity<>(HttpStatus.OK);
 		} catch (Throwable exception) {
 			System.err.println(exception.getMessage());
+		}
+		return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+
+	@RequestMapping(value = "/uploadAndUpdate/picture/photoOfUser", method = RequestMethod.POST)
+	public ResponseEntity<HttpStatus> updatePhotoOfUser(
+			@RequestParam("file") MultipartFile file, @RequestParam("guidOfUser") String guidOfUser
+	) {
+		try {
+			userService.updatePhotoOfUser(file, guidOfUser);
+			return new ResponseEntity<>(HttpStatus.OK);
+		} catch (Throwable throwable) {
+			System.err.println(throwable.getMessage());
+		}
+		return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+
+	@RequestMapping(value = "/get/picture/photoOfUser", produces = "text/plain", method = RequestMethod.GET)
+	public ResponseEntity<String> getPhotoOfUser(@RequestParam("guidOfUser") String guidOfUser) {
+		try {
+			String pathToPhotoOfUser = userService.getPathPhotoOfUser(guidOfUser);
+			String base64StringFromImage = UtilForWorkWithMedia.getBASE64StringFromImage(pathToPhotoOfUser);
+			return new ResponseEntity<>(base64StringFromImage, HttpStatus.OK);
+		} catch (Throwable throwable) {
+			System.err.println(throwable.getMessage());
 		}
 		return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}

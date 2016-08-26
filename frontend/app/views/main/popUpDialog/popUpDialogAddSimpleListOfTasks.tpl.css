@@ -35,14 +35,10 @@
     width: 100%;
 }
 
-label[for="nameOfSimpleListOfTasks"] {
+label[for="nameOfSimpleListOfTasks"], label[for="descriptionOfCreatedSimpleListOfTasks"] {
     cursor: pointer;
-    display: inline-block;
-    width: 110px;
-}
-
-#nameOfSimpleListOfTasks {
-    width: calc(400px - 110px - 2 * 5px);
+    display: block;
+    margin-bottom: 5px;
 }
 
 .description {

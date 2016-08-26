@@ -89,7 +89,6 @@ input#find:active, input.add_user:active {
 }
 
 #collection_of_people {
-    margin-top: 15px;
     overflow: hidden;
 }
 

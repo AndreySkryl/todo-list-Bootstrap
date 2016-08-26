@@ -28,6 +28,7 @@
             <artifactId>spring-boot-starter-tomcat</artifactId>
             <version>1.3.3.RELEASE</version>
         </dependency>
+        <!--<scope>provided</scope>-->
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -81,7 +82,7 @@
             <version>1.9.13</version>
         </dependency>
 
-        <!--jstl-->
+        <!--jstl Необходим для Tomcata-->
         <dependency>
             <groupId>jstl</groupId>
             <artifactId>jstl</artifactId>
@@ -111,6 +112,12 @@
             <groupId>commons-codec</groupId>
             <artifactId>commons-codec</artifactId>
             <version>1.9</version>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+            <version>1.3.1</version>
         </dependency>
 
     </dependencies>

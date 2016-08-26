@@ -13,7 +13,6 @@
     float: left;
     list-style: none;
     line-height: 70px;
-    padding: 0 14px;
     position: relative;
     text-align: center;
 }
@@ -22,6 +21,7 @@
     color: #747474;
     display: block;
     font-size: 24px;
+    padding: 0 14px;
 }
 
 #navigation ul li:hover {
@@ -43,7 +43,7 @@
 
 #user_profile ul li img {
     border-radius: 30px;
-    background: aliceblue;
+    background: white;
     line-height: 70px;
     height: 60px;
     margin: 5px;
@@ -53,4 +53,8 @@
 #user_full_name {
     color: #747474;
     font-size: 24px;
+}
+
+span#user_full_name {
+    margin-right: 5px;
 }

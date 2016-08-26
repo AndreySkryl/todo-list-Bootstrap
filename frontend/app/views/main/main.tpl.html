@@ -57,12 +57,12 @@
 
 <div id="colleagues" ng-controller="ColleaguesController">
     <p>Коллеги</p>
-    <input id="search_of_user" type="text" placeholder="Поиск" ng-model="colleaguesController.search">
+    <input class="form-control" id="search_of_user" type="text" placeholder="Поиск" ng-model="colleaguesController.search">
     <div id="list_of_colleagues">
         <ul>
             <li class="colleague" ng-repeat="colleague in colleagues | filter:colleaguesController.search | orderBy:['lastName', 'firstName']">
                 <ul>
-                    <li><img src="img/photo_of_user.png" alt="Фото пользователя"/></li>
+                    <li><img ng-src="{{ colleague.pathToPhotoOfUser }}" alt="Фото пользователя"/></li>
                     <li><span class="user_full_name">{{ colleague.lastName }} {{ colleague.firstName }}</span></li>
                 </ul>
             </li>

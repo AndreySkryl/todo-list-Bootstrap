@@ -1,9 +1,12 @@
 package database.todoList.model;
 
+import database.todoList.utils.UtilForWorkWithMedia;
 import org.springframework.stereotype.Component;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.Collection;
 
 @Component
 public class User implements Serializable {
@@ -15,6 +18,7 @@ public class User implements Serializable {
     String firstName;
     String password;
     String eMail;
+    String pathToPhotoOfUser;
     Timestamp createTime;
     Timestamp updateTime;
 
@@ -82,6 +86,14 @@ public class User implements Serializable {
         this.eMail = eMail;
     }
 
+    public String getPathToPhotoOfUser() {
+        return pathToPhotoOfUser;
+    }
+
+    public void setPathToPhotoOfUser(String pathToPhotoOfUser) {
+        this.pathToPhotoOfUser = pathToPhotoOfUser;
+    }
+
     public Timestamp getCreateTime() {
         return createTime;
     }
@@ -127,5 +139,17 @@ public class User implements Serializable {
                 ", createTime=" + createTime +
                 ", updateTime=" + updateTime +
                 '}';
+    }
+
+    public static void convertFROMPathToPhotoOfUserTOBase64StringFromImage(User user) throws IOException {
+        String base64StringFromImage = UtilForWorkWithMedia.getBASE64StringFromImage(user.getPathToPhotoOfUser());
+        user.setPathToPhotoOfUser(base64StringFromImage);
+    }
+
+    public static void convertFROMPathToPhotoOfUserTOBase64StringFromImage(Collection<User> users) throws IOException {
+        for (User user : users) {
+            String base64StringFromImage = UtilForWorkWithMedia.getBASE64StringFromImage(user.getPathToPhotoOfUser());
+            user.setPathToPhotoOfUser(base64StringFromImage);
+        }
     }
 }

@@ -1,8 +1,10 @@
-module.exports = function(grunt) {
+module.exports = function (grunt) {
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
 
-		clean: ['build'],
+		clean: [
+			'build/*'
+		],
 
 		copy: {
 			main: {
@@ -60,6 +62,8 @@ module.exports = function(grunt) {
 						'build/node_modules/angular/angular.js',
 						'build/node_modules/angular-animate/angular-animate.js',
 						'build/node_modules/angular-drag-and-drop-lists/angular-drag-and-drop-lists.js',
+						'build/node_modules/ng-file-upload/dist/FileAPI.js',
+						'build/node_modules/ng-file-upload/dist/ng-file-upload-all.js',
 						'build/node_modules/angular-touch/angular-touch.js',
 						'build/node_modules/angular-ui-bootstrap/dist/ui-bootstrap.js',
 						'build/node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js',
@@ -117,7 +121,7 @@ module.exports = function(grunt) {
 			},
 			my_target: {
 				files: [{
-					'build/js/<%= pkg.name %>.min.js' : ['build/js/<%= pkg.name %>.js']
+					'build/js/<%= pkg.name %>.min.js': ['build/js/<%= pkg.name %>.js']
 				}]
 			}
 		},
@@ -163,28 +167,10 @@ module.exports = function(grunt) {
 
 	grunt.registerTask('default', ['clean', 'copy', 'htmlmin', 'html2js', 'jshint', 'concat', 'concat_css', 'cssmin', /*'uglify', */'removelogging']);
 	grunt.registerTask('watcher', ['watch']);
+
+	/*grunt.registerMultiTask('clean', function() {
+		this.filesSrc.forEach(function(filepath) {
+			console.log('delete', filepath);
+		});
+	});*/
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

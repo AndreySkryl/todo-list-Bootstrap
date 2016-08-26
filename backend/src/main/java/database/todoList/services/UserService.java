@@ -1,6 +1,7 @@
 package database.todoList.services;
 
 import database.todoList.model.User;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Collection;
 
@@ -20,4 +21,7 @@ public interface UserService {
 
 	void deleteUser(String guid);
 	void deleteUsers(Collection<String> guides);
+
+	void updatePhotoOfUser(MultipartFile file, String guidOfUser) throws Exception;
+	String getPathPhotoOfUser(String guidOfUser);
 }

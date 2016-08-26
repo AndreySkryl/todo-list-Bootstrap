@@ -2,7 +2,7 @@
     <div id="popUpDialogAddSimpleListOfTasks">
         <span>
             <label for="nameOfSimpleListOfTasks">Наименование:</label>
-            <input id="nameOfSimpleListOfTasks" type="text" ng-model="nameOfSimpleListOfTasks">
+            <input class="form-control" id="nameOfSimpleListOfTasks" type="text" ng-model="nameOfSimpleListOfTasks">
         </span>
 
         <fieldset ng-show="(listsOfTasks | filter:{favourites:1}).length != 0">
@@ -20,6 +20,7 @@
                         ng-options = "listOfTasks.guid as listOfTasks.name for listOfTasks in listsOfTasks | filter:{favourites:1} | orderBy:['name']"
                         ng-init = "selectedTemplateListOfTasks = listsOfTasks[0]"
                         ng-disabled = "typeOfCreateOfTemplateListOfTasks === '0'"
+                        class="form-control"
                 >
                 </select>
             </div>
@@ -34,8 +35,10 @@
 
         <div class="description">
             <label for="descriptionOfCreatedSimpleListOfTasks">Описание списка задач:</label>
-            <textarea id="descriptionOfCreatedSimpleListOfTasks" ng-model="descriptionOfSimpleListOfTasks"></textarea>
+            <textarea class="form-control" id="descriptionOfCreatedSimpleListOfTasks" ng-model="descriptionOfSimpleListOfTasks"></textarea>
         </div>
+
+        <br>
 
         <div id="activitiesForCreatedSimpleListOfTasks">
             <button id="addSimpleListOfTasksApprove" ng-click="popUpDialogAddSimpleListOfTasksApprove()"

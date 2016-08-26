@@ -1,7 +1,9 @@
 package database.todoList.dao;
 
 import database.todoList.model.User;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.Collection;
 
 public interface UserDAO {
@@ -21,4 +23,7 @@ public interface UserDAO {
 
     void delete(String guid);
 	void delete(Collection<String> guides);
+
+    void updatePhotoOfUser(MultipartFile file, String guidOfUser) throws IOException;
+    String getPathToPhotoOfUser(String guidOfUser);
 }

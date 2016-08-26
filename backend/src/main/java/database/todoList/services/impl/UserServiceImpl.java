@@ -5,6 +5,7 @@ import database.todoList.model.User;
 import database.todoList.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Collection;
 import java.util.NoSuchElementException;
@@ -15,7 +16,8 @@ public class UserServiceImpl implements UserService {
 
 	public static final String THE_FIELDS_ARE_NOT_FILLED = "Какое-то из полей {GUID | LOGIN | PASSWORD |EMAIL} не заполнено.";
 	public static final String NO_FOUND_USER_WITH_THE_GUID = "Не удалось найти пользователя с таким GUID-ом.";
-	public static final String GUID_FIELD_IS_NOT_SET = "Поле GUID имеет значение null.";
+	public static final String GUID_FIELD_IS_NOT_SET = "Поле GUID имеет значение null или не задано.";
+	public static final String FILE_IS_EMPTY = "Передан пустой файл.";
 
 	boolean validation(User user) {
 		return user.getLogin() != null && user.getPassword() != null && user.geteMail() != null;
@@ -108,5 +110,18 @@ public class UserServiceImpl implements UserService {
 			if (guid == null) throw new IllegalArgumentException(GUID_FIELD_IS_NOT_SET);
 
 		userDAO.delete(guides);
+	}
+
+	@Override
+	public void updatePhotoOfUser(MultipartFile file, String guidOfUser) throws Exception {
+		if (file.isEmpty()) throw new Exception(FILE_IS_EMPTY);
+		if (guidOfUser == null || (guidOfUser.trim().equals(""))) throw new Exception(GUID_FIELD_IS_NOT_SET);
+
+		userDAO.updatePhotoOfUser(file, guidOfUser);
+	}
+
+	@Override
+	public String getPathPhotoOfUser(String guidOfUser) {
+		return userDAO.getPathToPhotoOfUser(guidOfUser);
 	}
 }
