@@ -23,5 +23,6 @@ public interface UserService {
 	void deleteUsers(Collection<String> guides);
 
 	void updatePhotoOfUser(MultipartFile file, String guidOfUser) throws Exception;
+	void updatePhotoOfUser(String fileInBASE64String, String guidOfUser) throws Exception;
 	String getPathPhotoOfUser(String guidOfUser);
 }

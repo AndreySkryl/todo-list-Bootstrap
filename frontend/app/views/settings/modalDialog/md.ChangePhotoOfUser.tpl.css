@@ -1,0 +1,13 @@
+#md-change-photo-of-user {
+    padding: 10px;
+}
+
+#resultPhoto {
+    background-color: #cccccc;
+}
+
+canvas#canvas {
+    margin: 5px 0;
+    height: 100%;
+    width: 100%;
+}

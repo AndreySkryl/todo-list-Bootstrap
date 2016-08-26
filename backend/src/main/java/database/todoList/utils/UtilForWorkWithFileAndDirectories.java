@@ -2,6 +2,7 @@ package database.todoList.utils;
 
 import org.springframework.stereotype.Component;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -42,6 +43,19 @@ public class UtilForWorkWithFileAndDirectories implements Serializable {
 			is.close();
 			os.close();
 		}
+	}
+
+	public static void saveBytesToFile(byte[] bytes, String pathToFile) throws IOException {
+		InputStream is = new ByteArrayInputStream(bytes);
+		OutputStream os = new FileOutputStream(pathToFile);
+
+		byte[] buffer = new byte[1024];
+		int length;
+		while ((length = is.read(buffer)) > 0) {
+			os.write(buffer, 0, length);
+		}
+		is.close();
+		os.close();
 	}
 
 	public static boolean deleteFile(String pathToFile) {

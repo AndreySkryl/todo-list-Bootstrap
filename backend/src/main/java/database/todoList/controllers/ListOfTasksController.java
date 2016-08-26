@@ -131,7 +131,9 @@ public class ListOfTasksController {
 	public ResponseEntity<Collection<User>> getAllSubscribers(
 			@RequestParam(ListOfTasks.GUID_OF_LIST_Of_TASKS) String guidOfListOfTask) {
 		try {
-			return new ResponseEntity<>(listOfTasksService.getAllSubscribersForListOfTask(guidOfListOfTask), HttpStatus.OK);
+			Collection<User> allSubscribersForListOfTask = listOfTasksService.getAllSubscribersForListOfTask(guidOfListOfTask);
+			User.convertFROMPathToPhotoOfUserTOBase64StringFromImage(allSubscribersForListOfTask);
+			return new ResponseEntity<>(allSubscribersForListOfTask, HttpStatus.OK);
 		} catch (Throwable exception) {
 			System.err.println(exception.getMessage());
 		}
@@ -143,7 +145,9 @@ public class ListOfTasksController {
 			@RequestParam(ListOfTasks.GUID_OF_LIST_Of_TASKS) String guidOfListOfTask,
 			@RequestParam(User.GUID_OF_USER) String guidOfUser) {
 		try {
-			return new ResponseEntity<>(listOfTasksService.getAllUnsignedForListOfTask(guidOfListOfTask, guidOfUser), HttpStatus.OK);
+			Collection<User> allUnsignedForListOfTask = listOfTasksService.getAllUnsignedForListOfTask(guidOfListOfTask, guidOfUser);
+			User.convertFROMPathToPhotoOfUserTOBase64StringFromImage(allUnsignedForListOfTask);
+			return new ResponseEntity<>(allUnsignedForListOfTask, HttpStatus.OK);
 		} catch (Throwable exception) {
 			System.err.println(exception.getMessage());
 		}

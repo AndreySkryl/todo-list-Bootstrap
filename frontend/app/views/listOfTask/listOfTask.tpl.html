@@ -93,7 +93,7 @@
         <ul>
             <li class="colleague" ng-repeat="subscriber in subscribers">
                 <ul>
-                    <li><img src="img/photo_of_user.png" alt="Фото пользователя" width="50" height="50"/></li>
+                    <li><img ng-src="{{ subscriber.pathToPhotoOfUser }}" alt="Фото пользователя" width="50" height="50"/></li>
                     <li><span class="user_full_name">{{ subscriber.lastName }} {{ subscriber.firstName }}</span></li>
                 </ul>
                 <ul class="actions">

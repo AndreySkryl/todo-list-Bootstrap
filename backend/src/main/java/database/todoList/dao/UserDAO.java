@@ -25,5 +25,7 @@ public interface UserDAO {
 	void delete(Collection<String> guides);
 
     void updatePhotoOfUser(MultipartFile file, String guidOfUser) throws IOException;
+    void updatePhotoOfUser(String fileInBASE64String, String guidOfUser) throws IOException;
+
     String getPathToPhotoOfUser(String guidOfUser);
 }

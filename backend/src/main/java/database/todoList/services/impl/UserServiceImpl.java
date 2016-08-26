@@ -121,6 +121,14 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	public void updatePhotoOfUser(String fileInBASE64String, String guidOfUser) throws Exception {
+		if (fileInBASE64String.isEmpty()) throw new Exception(FILE_IS_EMPTY);
+		if (guidOfUser == null || (guidOfUser.trim().equals(""))) throw new Exception(GUID_FIELD_IS_NOT_SET);
+
+		userDAO.updatePhotoOfUser(fileInBASE64String, guidOfUser);
+	}
+
+	@Override
 	public String getPathPhotoOfUser(String guidOfUser) {
 		return userDAO.getPathToPhotoOfUser(guidOfUser);
 	}

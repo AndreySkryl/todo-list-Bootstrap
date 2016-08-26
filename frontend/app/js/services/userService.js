@@ -59,13 +59,19 @@
 					});
 				};
 
-				// загрузка картинок
-				service.uploadAndUpdatePhotoOfUser = function (dataUrl, picFile, guidOfUser) {
-					return Upload.upload({
+				// обновление картинки пользователя
+				service.updatePhotoOfUser = function (croppedImage, guidOfUser) {
+					return $http({
 						method: 'POST',
-						url: configAppService.api + '/user/uploadAndUpdate/picture/photoOfUser',
-						fields: { 'guidOfUser': guidOfUser },
-						file: picFile //Upload.dataUrltoBlob(dataUrl, picFile.name)
+						url: configAppService.api + '/user/update/picture/photoOfUser/fileAsBASE64String',
+						headers: {
+							'Accept': 'text/plain',
+							'Content-Type': 'text/plain'
+						},
+						params: {
+							guidOfUser: guidOfUser
+						},
+						data: croppedImage
 					});
 				};
 

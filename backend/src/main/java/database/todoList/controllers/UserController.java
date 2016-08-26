@@ -127,12 +127,25 @@ public class UserController {
 		return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
-	@RequestMapping(value = "/uploadAndUpdate/picture/photoOfUser", method = RequestMethod.POST)
+	@RequestMapping(value = "/update/picture/photoOfUser", method = RequestMethod.POST)
 	public ResponseEntity<HttpStatus> updatePhotoOfUser(
 			@RequestParam("file") MultipartFile file, @RequestParam("guidOfUser") String guidOfUser
 	) {
 		try {
 			userService.updatePhotoOfUser(file, guidOfUser);
+			return new ResponseEntity<>(HttpStatus.OK);
+		} catch (Throwable throwable) {
+			System.err.println(throwable.getMessage());
+		}
+		return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+
+	@RequestMapping(value = "/update/picture/photoOfUser/fileAsBASE64String", consumes="text/plain", method = RequestMethod.POST)
+	public ResponseEntity<HttpStatus> updatePhotoOfUser(
+			@RequestBody String fileInBASE64String, @RequestParam("guidOfUser") String guidOfUser
+	) {
+		try {
+			userService.updatePhotoOfUser(fileInBASE64String, guidOfUser);
 			return new ResponseEntity<>(HttpStatus.OK);
 		} catch (Throwable throwable) {
 			System.err.println(throwable.getMessage());

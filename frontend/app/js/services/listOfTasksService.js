@@ -91,7 +91,9 @@
 				return $http({
 					method: 'GET',
 					url: configAppService.api + '/list_of_tasks/get/all_subscribers',
-					params: {guidOfListOfTasks: guidOfListOfTasks}
+					params: {
+						guidOfListOfTasks: guidOfListOfTasks
+					}
 				});
 			};
 

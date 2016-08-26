@@ -1,20 +1,31 @@
-<form name="myForm">
-    <div>Crop Image and Upload</div>
-    <button ngf-select ng-model="picFile" accept="image/*">
-        Select Picture</button>
-    <div ngf-drop ng-model="picFile" ngf-pattern="image/*"
-         class="cropArea">
-        <img-crop image="picFile  | ngfDataUrl"
-                  result-image="croppedDataUrl" ng-init="croppedDataUrl=''">
-        </img-crop>
-    </div>
-    <div>
-        <img ng-src="{{croppedDataUrl}}" />
-    </div>
-    <button ng-click="upload(croppedDataUrl, picFile)">Submit</button>
-    <span ng-show="result">Upload Successful</span>
-    <span class="err" ng-show="errorMsg">{{errorMsg}}</span>
-</form>
+<div id="md-change-photo-of-user">
 
-<button class="btn btn-default" ng-click="close()">Закрыть</button>
+    <input type="file" img-cropper-fileread image="cropper.sourceImage" />
+
+    <div>
+        <div class="row">
+            <div class="col-md-6">
+                <div>Исходное изображение:</div>
+                <canvas width="280" height="280"
+                        id="canvas"
+                        image-cropper image="cropper.sourceImage" cropped-image="cropper.croppedImage"
+                        crop-width="280" crop-height="280"
+                >
+                </canvas>
+            </div>
+            <div class="col-md-6">
+                <div>Результат:</div>
+                <div id="resultPhoto" ng-show="cropper.croppedImage != null">
+                    <img ng-src="{{ cropper.croppedImage }}" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="clear"></div>
+    <button class="btn btn-success" ng-click="changePhotoOfUser()" ng-show="cropper.croppedImage != null">
+        Обновить фото пользователя
+    </button>
+    <button class="btn btn-default" ng-click="close()">Закрыть окно</button>
+</div>
 

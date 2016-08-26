@@ -11,16 +11,15 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Repository
 public class UserDAOImpl implements UserDAO {
@@ -175,19 +174,33 @@ public class UserDAOImpl implements UserDAO {
 		String pathToOldPhotoOfUser = getPathToPhotoOfUser(guidOfUser);
 		UtilForWorkWithFileAndDirectories.deleteFile(pathToOldPhotoOfUser);
 
-		byte[] bytes = file.getBytes();
-		InputStream is = new ByteArrayInputStream(bytes);
+		byte[] bytesOfImage = file.getBytes();
 		String fileExtension = UtilForWorkWithFileAndDirectories.getFileExtension(file.getOriginalFilename());
 		String pathToNewPhotoOfUser = UtilForManageResources.PATH_TO_RESOURCES_OF_TABLE_USER + guidOfUser + "/" +
 				UtilForManageResources.DEFAULT_NAME_OF_FILE_OF_PHOTO_OF_USER + "." + fileExtension;
-		OutputStream os = new FileOutputStream(pathToNewPhotoOfUser);
-		byte[] buffer = new byte[1024];
-		int length;
-		while ((length = is.read(buffer)) > 0) {
-			os.write(buffer, 0, length);
-		}
-		is.close();
-		os.close();
+		UtilForWorkWithFileAndDirectories.saveBytesToFile(bytesOfImage, pathToNewPhotoOfUser);
+
+		String sql = "UPDATE USER SET PATH_TO_PHOTO_OF_USER = ? WHERE GUID = ?";
+		jdbcTemplate.update(sql, pathToNewPhotoOfUser, guidOfUser);
+	}
+
+	@Override
+	public void updatePhotoOfUser(String fileInBASE64String, String guidOfUser) throws IOException {
+		// проверка данных на BASE64 String
+		Pattern pattern = Pattern.compile("data:image/([a-z]+);base64,([a-zA-Z0-9+/=]+)");
+		Matcher matcher = pattern.matcher(fileInBASE64String);
+
+		if (!matcher.matches()) throw new IllegalArgumentException("В неверном формате пришли данные BASE64 String.");
+
+		String pathToOldPhotoOfUser = getPathToPhotoOfUser(guidOfUser);
+		UtilForWorkWithFileAndDirectories.deleteFile(pathToOldPhotoOfUser);
+
+		String fileExtension = matcher.group(1);
+		String imageInBASE64String = matcher.group(2);
+		byte[] bytesOfImage = Base64.getDecoder().decode(imageInBASE64String);
+		String pathToNewPhotoOfUser = UtilForManageResources.PATH_TO_RESOURCES_OF_TABLE_USER + guidOfUser + "/" +
+				UtilForManageResources.DEFAULT_NAME_OF_FILE_OF_PHOTO_OF_USER + "." + fileExtension;
+		UtilForWorkWithFileAndDirectories.saveBytesToFile(bytesOfImage, pathToNewPhotoOfUser);
 
 		String sql = "UPDATE USER SET PATH_TO_PHOTO_OF_USER = ? WHERE GUID = ?";
 		jdbcTemplate.update(sql, pathToNewPhotoOfUser, guidOfUser);

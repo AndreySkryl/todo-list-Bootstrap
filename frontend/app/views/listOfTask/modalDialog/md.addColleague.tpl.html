@@ -6,7 +6,7 @@
         <ul>
             <li class="user" ng-repeat="unsignedColleague in unsignedColleagues | orderBy:['lastName', 'firstName']">
                 <ul>
-                    <li><img src="img/photo_of_user.png" alt="Фото пользователя"/></li>
+                    <li><img ng-src="{{ unsignedColleague.pathToPhotoOfUser }}" alt="Фото пользователя"/></li>
                     <li><span class="user_full_name">{{ unsignedColleague.lastName }} {{ unsignedColleague.firstName }}</span></li>
                 </ul>
 
