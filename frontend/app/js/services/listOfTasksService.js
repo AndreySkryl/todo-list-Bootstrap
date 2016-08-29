@@ -108,6 +108,17 @@
 				});
 			};
 
+			// статистика
+			service.getPercentOfPlannedTasks = function (guidOfListOfTasks) {
+				return $http({
+					method: 'GET',
+					url: configAppService.api + '/list_of_tasks/get/PercentOfPlannedTasks',
+					params: {
+						guidOfListOfTasks: guidOfListOfTasks
+					}
+				});
+			};
+
 			return service;
 		}]);
 })();

@@ -153,4 +153,16 @@ public class ListOfTasksController {
 		}
 		return new ResponseEntity<Collection<User>>(Collections.EMPTY_LIST, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
+
+
+	// статистика
+	@RequestMapping(value = "/get/PercentOfPlannedTasks", produces = "text/plain", method = RequestMethod.GET)
+	public ResponseEntity<String> getPercentOfPlannedTasks(@RequestParam(ListOfTasks.GUID_OF_LIST_Of_TASKS) String guidOfListOfTask) {
+		try {
+			return new ResponseEntity<>(listOfTasksService.getPercentOfPlannedTasks(guidOfListOfTask).toString(), HttpStatus.OK);
+		} catch (Throwable exception) {
+			System.err.println(exception.getMessage());
+		}
+		return new ResponseEntity<>("0", HttpStatus.INTERNAL_SERVER_ERROR);
+	}
 }

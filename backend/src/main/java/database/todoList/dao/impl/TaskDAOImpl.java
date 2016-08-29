@@ -23,6 +23,8 @@ public class TaskDAOImpl implements TaskDAO {
 
 		String sql = "INSERT INTO TASK (LIST_OF_TASKS_GUID, STATUS, DESCRIPTION, DISPLAY_POSITION) VALUES (?, ?, ?, ?)";
         jdbcTemplate.update(sql, task.getListOfTasksGuid(), task.getStatus().toString(), task.getDescription(), number.intValue());
+
+		changeStatusOnIncrement(task);
     }
 
     @Override
@@ -62,8 +64,13 @@ public class TaskDAOImpl implements TaskDAO {
 
     @Override
     public void update(Task task) {
+		Task taskFromDB = findTaskByGuid(task.getGuid());
+
 		String sql = "UPDATE TASK SET LIST_OF_TASKS_GUID = ?, STATUS = ?, DESCRIPTION = ?, DISPLAY_POSITION = ? WHERE GUID = ?;";
 		jdbcTemplate.update(sql, task.getListOfTasksGuid(), task.getStatus().getValue(), task.getDescription(), task.getDisplayPosition(), task.getGuid());
+
+		changeStatusOnDecrement(taskFromDB);
+		changeStatusOnIncrement(task);
 	}
 
 	public void update(Collection<Task> tasks) {
@@ -72,13 +79,72 @@ public class TaskDAOImpl implements TaskDAO {
 
 	@Override
 	public void delete(String guidOfTask) {
+		Task task = findTaskByGuid(guidOfTask);
+
 		String sql = "DELETE FROM TASK WHERE GUID = ?;";
 		jdbcTemplate.update(sql, guidOfTask);
+
+		changeStatusOnDecrement(task);
 	}
 
 	@Override
 	public void deleteByGuidOfListOfTasks(String guidOfListOfTask) {
 		String sql = "DELETE FROM TASK WHERE LIST_OF_TASKS_GUID = ?;";
 		jdbcTemplate.update(sql, guidOfListOfTask);
+	}
+
+	public void changeStatusOnIncrement(Task task) {
+		switch (task.getStatus()) {
+			case PLAN:
+				String sqlForPlan =
+						"UPDATE LIST_OF_TASKS " +
+						"SET COUNT_OF_PLAN_TASKS = COUNT_OF_PLAN_TASKS + 1 " +
+						"WHERE LIST_OF_TASKS.GUID = ?;";
+				jdbcTemplate.update(sqlForPlan, task.getListOfTasksGuid());
+				break;
+
+			case PROCESS:
+				String sqlForProcess =
+						"UPDATE LIST_OF_TASKS " +
+						"SET COUNT_OF_PROCESS_TASKS = COUNT_OF_PROCESS_TASKS + 1 " +
+						"WHERE LIST_OF_TASKS.GUID = ?;";
+				jdbcTemplate.update(sqlForProcess, task.getListOfTasksGuid());
+				break;
+
+			case DONE:
+				String sqlForDone =
+						"UPDATE LIST_OF_TASKS " +
+						"SET COUNT_OF_DONE_TASKS = COUNT_OF_DONE_TASKS + 1 " +
+						"WHERE LIST_OF_TASKS.GUID = ?;";
+				jdbcTemplate.update(sqlForDone, task.getListOfTasksGuid());
+				break;
+		}
+	}
+	public void changeStatusOnDecrement(Task task) {
+		switch (task.getStatus()) {
+			case PLAN:
+				String sqlForPlan =
+						"UPDATE LIST_OF_TASKS " +
+						"SET COUNT_OF_PLAN_TASKS = COUNT_OF_PLAN_TASKS - 1 " +
+						"WHERE LIST_OF_TASKS.GUID = ?;";
+				jdbcTemplate.update(sqlForPlan, task.getListOfTasksGuid());
+				break;
+
+			case PROCESS:
+				String sqlForProcess =
+						"UPDATE LIST_OF_TASKS " +
+						"SET COUNT_OF_PROCESS_TASKS = COUNT_OF_PROCESS_TASKS - 1 " +
+						"WHERE LIST_OF_TASKS.GUID = ?;";
+				jdbcTemplate.update(sqlForProcess, task.getListOfTasksGuid());
+				break;
+
+			case DONE:
+				String sqlForDone =
+						"UPDATE LIST_OF_TASKS " +
+						"SET COUNT_OF_DONE_TASKS = COUNT_OF_DONE_TASKS - 1 " +
+						"WHERE LIST_OF_TASKS.GUID = ?;";
+				jdbcTemplate.update(sqlForDone, task.getListOfTasksGuid());
+				break;
+		}
 	}
 }

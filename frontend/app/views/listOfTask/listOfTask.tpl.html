@@ -62,6 +62,12 @@
                     >
                         <span>{{ task.description }}</span>
                         <ul>
+                            <li>
+                                <button ng-click="modalDialogForEditDescription(task)" class="btn btn-primary">
+                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                </button>
+                            </li>
+
                             <li ng-click="changeStatusToPlan(task)" ng-if="task.status == 'PROCESS'">
                                 <img src="img/status/orange_ellipse.png"
                                      alt="Перевести задачу в состояние {status: 'PLAN'}">

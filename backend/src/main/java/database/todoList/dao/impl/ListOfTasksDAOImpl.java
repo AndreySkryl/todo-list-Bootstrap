@@ -147,4 +147,19 @@ public class ListOfTasksDAOImpl implements ListOfTasksDAO {
 		return jdbcTemplate.query(sql, new UserRowMapper(), guidOfUser, guidOfListOfTask);
 	}
 
+	@Override
+	public Double getPercentOfPlannedTasks(String guidOfListOfTask) {
+		String sql =
+				"SELECT " +
+					"(SELECT COUNT(*) FROM TASK WHERE TASK.LIST_OF_TASKS_GUID = ? " +
+													"AND TASK.STATUS = 'PROCESS') " +
+					"/ " +
+					"(SELECT COUNT(*) FROM TASK WHERE TASK.LIST_OF_TASKS_GUID = ?);";
+
+		Double result = jdbcTemplate.queryForObject(sql, Double.class, guidOfListOfTask);
+
+		if (result == null) result = 0d;
+		return result;
+	}
+
 }

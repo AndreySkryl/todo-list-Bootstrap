@@ -12,6 +12,7 @@
 					var promise = listOfTasksService.getAllListsOfTasksOfUser(guidOfUser);
 					promise.success(function (data, status, headers, config) {
 						$scope.listsOfTasks = data;
+
 					}).error(function (data, status, headers, config) {
 						alert(status);
 					});
@@ -50,6 +51,15 @@
 				$rootScope.$on('simpleListOfTasks::created', function () {
 					syncModelWithServer();
 				});
+
+
+				// статистика
+				$scope.getPercentOfPlannedTasks = function (guidOfListOfTasks) {
+					var promise = listOfTasksService.getPercentOfPlannedTasks(guidOfListOfTasks);
+					promise.then(function (result) {
+						return result;
+					});
+				};
 			}])
 		.directive('popUpDialogAddTemplateListOfTasks', ['sessionService', function (sessionService) {
 			return {

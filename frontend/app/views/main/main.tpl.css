@@ -128,6 +128,13 @@ li.list_of_tasks > span {
     hyphens: manual;  /* значение auto не поддерживается Chrome */
 }
 
+li.list_of_tasks > div.progress {
+    position: absolute;
+    bottom: 0;
+    margin: 0;
+    width: 100%;
+}
+
 /* Коллеги */
 #colleagues {
     float: right;

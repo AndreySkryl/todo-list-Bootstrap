@@ -170,4 +170,10 @@ public class ListOfTasksServiceImpl implements ListOfTasksService {
 
 		return listOfUsersOfListOfTasks;
 	}
+
+	@Override
+	public Double getPercentOfPlannedTasks(String guidOfListOfTask) {
+		if (guidOfListOfTask == null) throw new IllegalArgumentException(GUID_FIELD_IS_NOT_SET);
+		return listOfTasksDAO.getPercentOfPlannedTasks(guidOfListOfTask);
+	}
 }

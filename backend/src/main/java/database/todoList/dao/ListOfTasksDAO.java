@@ -29,4 +29,6 @@ public interface ListOfTasksDAO {
 	Collection<User> getAllSubscribersForListOfTask(String guidOfListOfTask);
 
 	Collection<User> getAllUnsignedForListOfTask(String guidOfListOfTask, String guidOfUser);
+
+	Double getPercentOfPlannedTasks(String guidOfListOfTask);
 }

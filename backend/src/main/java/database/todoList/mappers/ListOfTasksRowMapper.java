@@ -17,6 +17,11 @@ public class ListOfTasksRowMapper implements RowMapper<ListOfTasks> {
         listOfTasks.setDescription(resultSet.getString("DESCRIPTION"));
         listOfTasks.setCreateTime(resultSet.getTimestamp("CREATE_TIME"));
         listOfTasks.setUpdateTime(resultSet.getTimestamp("UPDATE_TIME"));
+
+        listOfTasks.setCountOfPlanTask(resultSet.getInt("COUNT_OF_PLAN_TASKS"));
+        listOfTasks.setCountOfProcessTask(resultSet.getInt("COUNT_OF_PROCESS_TASKS"));
+        listOfTasks.setCountOfDoneTask(resultSet.getInt("COUNT_OF_DONE_TASKS"));
+
         return listOfTasks;
     }
 }

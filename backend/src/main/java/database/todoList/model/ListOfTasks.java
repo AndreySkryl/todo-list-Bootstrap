@@ -16,6 +16,11 @@ public class ListOfTasks {
     Timestamp createTime;
     Timestamp updateTime;
 
+	// статистика
+    Integer countOfPlanTask;
+    Integer countOfProcessTask;
+    Integer countOfDoneTask;
+
     public ListOfTasks() {}
 
     public ListOfTasks(String guid, String userGuid, int favourites, String name) {
@@ -80,6 +85,30 @@ public class ListOfTasks {
     public void setUpdateTime(Timestamp updateTime) {
         this.updateTime = updateTime;
     }
+
+	public Integer getCountOfPlanTask() {
+		return countOfPlanTask;
+	}
+
+	public void setCountOfPlanTask(Integer countOfPlanTask) {
+		this.countOfPlanTask = countOfPlanTask;
+	}
+
+	public Integer getCountOfProcessTask() {
+		return countOfProcessTask;
+	}
+
+	public void setCountOfProcessTask(Integer countOfProcessTask) {
+		this.countOfProcessTask = countOfProcessTask;
+	}
+
+	public Integer getCountOfDoneTask() {
+		return countOfDoneTask;
+	}
+
+	public void setCountOfDoneTask(Integer countOfDoneTask) {
+		this.countOfDoneTask = countOfDoneTask;
+	}
 
     @Override
     public String toString() {

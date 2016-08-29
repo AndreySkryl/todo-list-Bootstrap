@@ -21,6 +21,42 @@
                     <li class="list_of_tasks" ng-repeat="listOfTasks in listsOfTasks | filter:{favourites:1} | orderBy:['name']">
                         <a ui-sref="listOfTasks({ guidOfListOfTasks: listOfTasks.guid })">{{ listOfTasks.name }}</a>
                         <img src="img/close.png" class="close" ng-click="deleteListOfTasks(listOfTasks)">
+
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-danger"
+                                 ng-style="{
+                                    'width': {{
+                                        (
+                                            listOfTasks.countOfPlanTask /
+                                            (listOfTasks.countOfPlanTask + listOfTasks.countOfProcessTask + listOfTasks.countOfDoneTask)
+                                        ) * 100
+                                    }} + '%'
+                                 }"
+                            >
+                            </div>
+                            <div class="progress-bar progress-bar-warning"
+                                 ng-style="{
+                                    'width': {{
+                                        (
+                                            listOfTasks.countOfProcessTask /
+                                            (listOfTasks.countOfPlanTask + listOfTasks.countOfProcessTask + listOfTasks.countOfDoneTask)
+                                        ) * 100
+                                    }} + '%'
+                                 }"
+                             >
+                            </div>
+                            <div class="progress-bar progress-bar-success"
+                                 ng-style="{
+                                    'width': {{
+                                        (
+                                            listOfTasks.countOfDoneTask /
+                                            (listOfTasks.countOfPlanTask + listOfTasks.countOfProcessTask + listOfTasks.countOfDoneTask)
+                                        ) * 100
+                                    }} + '%'
+                                 }"
+                            >
+                            </div>
+                        </div>
                     </li>
                 </ul>
             </div>
@@ -48,6 +84,42 @@
                     <li class="list_of_tasks" ng-repeat="listOfTasks in listsOfTasks | filter:{favourites:0} | orderBy:['name']">
                         <a ui-sref="listOfTasks({ guidOfListOfTasks: listOfTasks.guid })">{{ listOfTasks.name }}</a>
                         <img src="img/close.png" class="close" ng-click="deleteListOfTasks(listOfTasks)">
+
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-danger"
+                                 ng-style="{
+                                    'width': {{
+                                        (
+                                            listOfTasks.countOfPlanTask /
+                                            (listOfTasks.countOfPlanTask + listOfTasks.countOfProcessTask + listOfTasks.countOfDoneTask)
+                                        ) * 100
+                                    }} + '%'
+                                 }"
+                            >
+                            </div>
+                            <div class="progress-bar progress-bar-warning"
+                                 ng-style="{
+                                    'width': {{
+                                        (
+                                            listOfTasks.countOfProcessTask /
+                                            (listOfTasks.countOfPlanTask + listOfTasks.countOfProcessTask + listOfTasks.countOfDoneTask)
+                                        ) * 100
+                                    }} + '%'
+                                 }"
+                            >
+                            </div>
+                            <div class="progress-bar progress-bar-success"
+                                 ng-style="{
+                                    'width': {{
+                                        (
+                                            listOfTasks.countOfDoneTask /
+                                            (listOfTasks.countOfPlanTask + listOfTasks.countOfProcessTask + listOfTasks.countOfDoneTask)
+                                        ) * 100
+                                    }} + '%'
+                                 }"
+                            >
+                            </div>
+                        </div>
                     </li>
                 </ul>
             </div>
