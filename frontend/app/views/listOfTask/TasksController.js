@@ -40,6 +40,7 @@
 				var promise = taskService.newTask(task);
 				promise.success(function (data, status, headers, config) {
 					$scope.syncModelWithServer();
+					$scope.descriptionOfTask = '';
 				}).error(function (data, status, headers, config) {
 					alert(status);
 				});

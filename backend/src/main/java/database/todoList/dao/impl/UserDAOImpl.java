@@ -129,28 +129,26 @@ public class UserDAOImpl implements UserDAO {
     }
 
 	@Override
-	public Collection<User> findAllUsersWithoutUserSenderAndColleagues(String guidOfUserSender, Collection<String> guidesOfColleagues) {
-		List<String> guidesOfUserSenderAndColleagues = new ArrayList<>();
-		guidesOfUserSenderAndColleagues.add(guidOfUserSender);
-		guidesOfUserSenderAndColleagues.addAll(guidesOfColleagues);
-
-		StringBuilder stringBuilder = new StringBuilder();
-		for (int id = 0; id < guidesOfUserSenderAndColleagues.size(); id++) {
-			stringBuilder.append("'").append(guidesOfUserSenderAndColleagues.get(id)).append("'");
-			if (id != guidesOfUserSenderAndColleagues.size() - 1) {
-				stringBuilder.append(",");
-			}
-		}
-
-		String sql = "SELECT * FROM user WHERE GUID NOT IN ( SELECT GUID FROM user WHERE GUID IN (" + stringBuilder.toString() + ") );";
+	public Collection<User> findAllUsersWithoutUserSenderAndColleagues(String guidOfUserSender) {
+		String sql =
+				"SELECT u0.* " +
+				"FROM user u0 " +
+				"WHERE NOT EXISTS( " +
+					"SELECT colleague.COLLEAGUE_GUID " +
+					"FROM colleague " +
+					"WHERE colleague.USER_GUID = '2bcbfd86-14ec-4b4c-9f12-e1a24923b141' " +
+							"AND (u0.GUID = colleague.COLLEAGUE_GUID OR u0.GUID = colleague.USER_GUID) " +
+				"); ";
 		return jdbcTemplate.query(sql, new UserRowMapper());
-		//String sql = "SELECT * FROM user WHERE GUID NOT IN ( SELECT GUID FROM user WHERE GUID IN (?) );";
-		//return jdbcTemplate.query(sql, new UserRowMapper(), guidesOfUserSenderAndColleagues);
 	}
 
     @Override
     public void update(User user) {
-		String password = DigestUtils.md5Hex(user.getPassword());
+		User userFromDB = findUserByGuid(user.getGuid());
+		String password;
+		if (user.getPassword().equals(userFromDB.getPassword())) password = userFromDB.getPassword();
+		else password = DigestUtils.md5Hex(user.getPassword());
+
 		String sql = "UPDATE USER SET LOGIN = ?, LASTNAME = ?, FIRSTNAME = ?, PASSWORD = ?, EMAIL = ? WHERE GUID = ?;";
 		jdbcTemplate.update(sql, user.getLogin(), user.getLastName(), user.getFirstName(), password,
 				user.geteMail(), user.getGuid());

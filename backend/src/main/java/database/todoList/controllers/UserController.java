@@ -80,10 +80,8 @@ public class UserController {
     @RequestMapping(value = "/get/all", produces = "application/json", method = RequestMethod.GET)
     public ResponseEntity<Collection<User>> getAllUsers(@RequestParam(User.GUID_OF_USER) String guidOfUserSender) {
 		try {
-			Collection<String> guidesOfColleagues = colleagueService.findGuidesOfColleaguesByUserGuid(guidOfUserSender);
-
 			Collection<User> allUsersWithoutUserSenderAndColleagues =
-					userService.findAllUsersWithoutUserSenderAndColleagues(guidOfUserSender, guidesOfColleagues);
+					userService.findAllUsersWithoutUserSenderAndColleagues(guidOfUserSender);
 
 			User.convertFROMPathToPhotoOfUserTOBase64StringFromImage(allUsersWithoutUserSenderAndColleagues);
 

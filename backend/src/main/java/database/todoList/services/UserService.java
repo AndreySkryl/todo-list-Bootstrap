@@ -6,6 +6,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.Collection;
 
 public interface UserService {
+
 	String signUp(User user) throws Exception;
 	String login(User user) throws Exception;
 
@@ -15,7 +16,7 @@ public interface UserService {
 	User findUserByGuid(String guid);
 	Collection<User> findUsersByGuid(Collection<String> guides);
 	Collection<User> findAllUsers();
-	Collection<User> findAllUsersWithoutUserSenderAndColleagues(String guidOfUserSender, Collection<String> guidesOfColleagues);
+	Collection<User> findAllUsersWithoutUserSenderAndColleagues(String guidOfUserSender);
 
 	void updateUser(User user);
 

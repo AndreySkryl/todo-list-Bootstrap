@@ -17,7 +17,7 @@ public interface UserDAO {
     User findUserByGuid(String guid);
     Collection<User> findUsersByGuid(Collection<String> guides);
     Collection<User> findAll();
-    Collection<User> findAllUsersWithoutUserSenderAndColleagues(String guidOfUserSender, Collection<String> guidesOfColleagues);
+    Collection<User> findAllUsersWithoutUserSenderAndColleagues(String guidOfUserSender);
 
     void update(User user);
 

@@ -6,7 +6,10 @@
 			<span>
 				<p>
                     Описание: {{ listOfTasks.description }}
-                    <button ng-click="modalDialogEditMetaInfoAboutListOfTasks()" class="btn btn-success pull-right">
+                    <button ng-click="modalDialogEditMetaInfoAboutListOfTasks()"
+                            class="btn btn-success pull-right"
+                            id="editMetaInfoAboutListOfTasks"
+                    >
                         <i class="fa fa-cog" aria-hidden="true">&nbsp;Изменить мета-информацию</i>
                     </button>
                 </p>
@@ -30,7 +33,7 @@
 
             <div id="search">
                 <div class="input-group">
-                    <input ng-model="descriptionOfTask" class="form-control" type="text" placeholder="Поиск">
+                    <input ng-model="descriptionOfTask" class="form-control" type="text" placeholder="Введите описание задачи">
                     <span class="input-group-btn">
                          <button id="add" class="pull-right btn btn-success" type="button" ng-click="newTask(descriptionOfTask)">
                              <i class="fa fa-plus" aria-hidden="true"></i>&nbsp; Добавить задачу
@@ -42,7 +45,7 @@
             <div id="list_of_tasks">
                 <!-- добавляем возможность 'drag and drop' -->
                 <ul dnd-list="models.tasks">
-                    <li ng-repeat="task in models.tasks | filter:{status:statusOfTasks}"
+                    <li ng-repeat="task in models.tasks | filter:{status:statusOfTasks} | filter:{description:descriptionOfTask}"
                         dnd-draggable="task"
                         dnd-moved="models.tasks.splice($index, 1)"
                         dnd-effect-allowed="move"

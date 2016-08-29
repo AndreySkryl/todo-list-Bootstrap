@@ -177,6 +177,10 @@ li.description_of_task > ul > li > img:hover {
     opacity: 1;
 }
 
+button#editMetaInfoAboutListOfTasks {
+    margin-bottom: 20px;
+}
+
 /* Коллеги */
 #colleagues {
     float: right;
@@ -216,9 +220,9 @@ input#search_of_user {
 li.colleague {
     cursor: pointer;
     display: block;
-    height: 50px;
     line-height: 50px;
     padding: 5px 10px;
+    overflow: hidden;
 }
 
 li.colleague:hover {

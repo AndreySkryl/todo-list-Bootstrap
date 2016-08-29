@@ -14,7 +14,7 @@
 								$state.go('main');
 							}
 						}).error(function (data, status, headers, config) {
-							alert(data);
+							alert(status);
 						});
 					},
 					logout: function () {
