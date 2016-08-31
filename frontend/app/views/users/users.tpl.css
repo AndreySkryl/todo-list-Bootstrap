@@ -1,3 +1,7 @@
+#search_new_people {
+    margin-bottom: 10px;
+}
+
 #search_new_people > fieldset > legend,
 #collection_of_people > fieldset > ul > li > p,
 #colleagues > p {
@@ -99,32 +103,34 @@ input#find:active, input.add_user:active {
 }
 
 li.user {
-    height: 50px;
+    cursor: pointer;
+    display: block;
     line-height: 50px;
     padding: 5px 10px;
+    overflow: hidden;
 }
 
 li.user:hover {
-    background-color: #eaeaea;
+    background-color: #e5e5e5;
 }
 
-li.user ul > li {
+li.user > ul > li {
     float: left;
     list-style: none;
     height: 50px;
 }
 
-li.user ul > li > img {
+
+li.user > ul > li > img {
     border-radius: 25px;
-    background-color: #bbb;
     height: 50px;
-    margin-right: 5px;
+    margin: auto 5px;
     width: 50px;
 }
 
-li.user > ul > li > span {
+li.user > ul > li > span.user_full_name {
     color: #747474;
-    font-size: 22px;
+    font-size: 24px;
 }
 
 /* Коллеги */
@@ -178,7 +184,6 @@ li.colleague > ul > li {
 
 li.colleague > ul > li > img {
     border-radius: 25px;
-    /*background-color: #bbb;*/
     height: 50px;
     margin: auto 5px;
     width: 50px;

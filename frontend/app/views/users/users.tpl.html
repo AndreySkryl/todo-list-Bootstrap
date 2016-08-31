@@ -15,13 +15,15 @@
             <div id="collection_of_people">
                 <fieldset>
                     <ul>
-                        <li class="user" ng-repeat="user in users | filter:userController.search | orderBy:['lastName', 'firstName']">
+                        <li class="user"
+                            ng-repeat="user in users | filter:userController.search | orderBy:['lastName', 'firstName']">
                             <ul>
                                 <li><img ng-src="{{ user.pathToPhotoOfUser }}" alt="Фото"></li>
-                                <li><span>{{ user.lastName }} {{ user.firstName }}</span></li>
+                                <li><span class="user_full_name">{{ user.lastName }} {{ user.firstName }}</span></li>
                             </ul>
-                            <button class="pull-right btn btn-success" type="button" ng-click="newColleague(user)"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp; Добавить в коллеги</button>
-                            <!--<input class="add_user" type="submit" value="Добавить в коллеги" ng-click="newColleague(user)">-->
+                            <button class="pull-right btn btn-success" type="button" ng-click="newColleague(user)">
+                                <i class="fa fa-plus" aria-hidden="true"></i>&nbsp; Добавить в коллеги
+                            </button>
                         </li>
                     </ul>
                 </fieldset>
